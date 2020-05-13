@@ -1,0 +1,123 @@
+div.pro_left_img{
+    float: left;
+    padding:20px;
+    border:1px solid gainsboro;
+}
+#left_big_img{
+    padding:20px;
+    border:1px solid gainsboro;
+}
+#left_small_img{
+    width:86%;
+    margin:20px auto;
+}
+img.smallImg{
+    width:50px;
+    margin-right: 4px;
+    border:2px solid white;
+}
+img.smallImg:hover{
+    border:2px solid black;
+}
+
+div.pro_right_detail{
+    overflow: hidden;
+    padding:0 20px;
+    /*border:1px solid silver;*/
+}
+
+#pro_imgs{
+    width:800px;
+    margin: 20px auto;
+    border:1px solid silver;
+}
+#pro_imgs img{
+    margin-top:30px;
+    margin-left: 70px;
+    margin-bottom: 30px;
+}
+div.product_up{
+    height: 520px;
+    border-top:1px solid silver;
+    /*border-bottom:1px solid silver;*/
+    border-top-style: dotted;
+}
+div.pro_middle_detail{
+    width:1200px;
+    margin:20px auto;
+}
+
+div.pro_middle_detail{
+    border:1px solid silver;
+}
+
+div.xswl{
+    height: 58px;
+    border-bottom:1px silver solid;
+    margin-top:5px;
+    margin-bottom: 10px;
+}
+
+.awsl{
+    color:#ff0036;;
+    font-family: Arial;
+    font-size: 16px;
+}
+
+span.oneParams{
+    display: inline-block;
+    float: left;
+    margin:10px 0;
+    margin-left: 40px;
+    width:120px;
+    height: 35px;
+    font-size: 14px;
+
+}
+
+
+div.oneReview{
+    height: 70px;
+    border-bottom:1px solid silver;
+}
+
+div.foreContainer{
+    width:1200px;
+    margin: 50px auto;
+}
+
+div.pro_middle_detail{
+    border: 1px solid silver;
+}
+
+#pvName{
+    color: gray;
+    font-size: 14px;
+}
+
+#detali_01{
+    height: 50px;
+    border-bottom: 2px solid silver;
+}
+#detali_01 a{
+    padding-left: 30px;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    width:120px;
+}
+
+#cpsc{
+    height: 50px;
+    font-size: 16px;
+    padding-top:10px;
+    padding-left: 40px;
+    font-family: Arvo;
+}
+
+a.carBtn{
+    font-weight: bold;
+    font-family: "Arial";
+}

@@ -1,0 +1,122 @@
+div.settlement_div {
+    width: 1200px;
+    margin: 40px auto;
+    font-family: Arial;
+    font-size: 14px;
+}
+
+#sm_img {
+    display: inline-block;
+}
+
+div.sm_up {
+    height: 15px;
+    line-height: 15px;
+    margin-bottom: 30px;
+}
+
+div.sm_down div {
+    display: inline-block;
+}
+
+div.sm_me {
+    /*height: 100px;*/
+}
+
+span.sm_price {
+    color: #C40000;
+    font-weight: bold;
+}
+
+span.sm_price2 {
+    font-size: 18px;
+}
+
+div.sm_down {
+    height: 60px;
+    line-height: 60px;
+    background-color: #E5E5E5;
+}
+
+#sm_btn1 {
+    border: 0 solid white;
+    background-color: #AAAAAA;
+    color: white;
+    width: 50px;
+    height: 24px;
+}
+
+#sm_btn2 {
+    border: 0 solid white;
+    background-color: #AAAAAA;
+    color: white;
+    width: 160px;
+    font-size: 20px;
+    height: 59px;
+}
+
+#sm_img {
+    margin-left: 20px;
+}
+
+#sm_img img {
+    /*鼠标经过上面变为小手*/
+    cursor: pointer;
+}
+
+input.saleNum {
+    width: 30px;
+}
+
+a.handle_a {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    border: 1px solid lightgray;
+    line-height: 23px;
+    text-align: center;
+}
+
+a.handle_a:hover {
+    text-decoration: none;
+}
+
+a.cutNum_a {
+
+}
+
+a.addNum_a {
+
+}
+
+a.sm_product_nameTitle {
+    color: black;
+    font-size: 14px;
+}
+
+a.sm_product_nameTitle:hover {
+    text-decoration: none;
+    color: #C40000;
+}
+
+span.sm_realPrice {
+    color: #C40000;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+span.two_price {
+    display: block;
+    font-size: 15px;
+}
+
+div.product_infos {
+    position: relative;
+    height: 80px;
+}
+
+span.three_imgs {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}

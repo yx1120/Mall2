@@ -1,0 +1,99 @@
+/*-----------------------------------------public CSS*/
+
+/*----------forAllPage*/
+div.workArea{
+    width: 94%;
+    margin: 80px auto 0;
+}
+
+/*-----------forEdit*/
+div.editDiv{
+    width: 400px;
+    margin:150px auto;
+}
+
+div.pro_editDiv{
+    width: 400px;
+    margin:20px auto;
+}
+
+table.editTable input{
+    margin-left: 20px;
+}
+
+table.editTable tr{
+    height: 50px;
+}
+
+td.cate_text{
+    font-size: 15px;
+}
+
+div.workArea .myBread{
+    margin:20px 0;
+}
+/*-----------------------------------------editCategory.jsp*/
+/*------------------------------------------editProduct.jsp*/
+/*------------------------------------------editProperty.jsp*/
+/*-----------------------------------------editPropertyValue.jsp*/
+
+
+/*-----------forList*/
+div.category_addDiv {
+    width: 400px;
+    margin: 30px auto;
+}
+
+div.product_addDiv {
+    width: 380px;
+    margin: 30px auto;
+}
+
+div.proImg_addDiv {
+    width: 300px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+div.property_addDiv {
+    width: 360px;
+    margin: 30px auto;
+}
+
+table.addTable input {
+    margin-left: 20px;
+}
+
+table.addTable tr {
+    height: 50px;
+}
+
+div.detail_div{
+     width:70%;
+     margin:30px auto;
+}
+
+span.img_title{
+    color: #ff0036;
+    font-weight: bold;
+}
+
+.category_addDiv td.cate_text {
+    font-size: 15px;
+}
+
+h1.label-info {
+    font-size: 14px;
+}
+
+
+/*---------------------------------------------listCategory.jsp*/
+/*----------------------------------------------------------listOrder.jsp*/
+/*订单列表：无添加框*/
+/*------------------------重复----------------------------listProduct.jsp*/
+/*添加框的大小可能会不一样*/
+/*-------------------------------------------listProductImage.jsp*/
+/*------------------------------------------listProperty.jsp*/
+/*-----------------------------------------listUser.jsp*/
+
+

@@ -1,0 +1,7 @@
+这是2个jsp编写模板
+
+一个是完整的，另一个是部分（通常被包含在其他jsp文件中
+
+错误报告：org.mybatis.spring.MyBatisSystemException:
+nested exception is org.apache.ibatis.reflection.ReflectionException:
+ There is no getter for property named 'oid' in 'class indi.xu.domain.Review'

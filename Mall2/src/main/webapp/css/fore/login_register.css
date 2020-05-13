@@ -1,0 +1,79 @@
+div.form_div {
+    height: 620px;
+    background-color: gainsboro;
+    background-image: url("../../img/site/22.jpg");
+    padding-top: 130px;
+    width: 1400px;
+    margin: 50px auto;
+}
+
+#formId {
+    width: 520px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    opacity: 0.88;
+    padding: 40px;
+}
+
+#formId table tr {
+    height: 60px;
+}
+
+div.form_div input {
+    width: 210px;
+    /*opacity: 0.9;*/
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+span.login_txt {
+    /*color: white;*/
+    /*opacity: 0.8;*/
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#error_info {
+    width: 150px;
+    /*border: 1px solid red;*/
+    height: 30px;
+    line-height: 30px;
+    color: #ff0036;
+    font-size: 14px;
+}
+
+#check_error {
+    font-size: 14px;
+}
+
+button.login_btn {
+    width: 90px;
+    margin-left: 70px;
+    opacity: 0.9;
+    font-size: 15px;
+}
+
+button.login_btn3 {
+    width: 90px;
+    margin-left: 20px;
+    opacity: 0.9;
+    font-size: 15px;
+}
+
+button.login_btn2 {
+    background-color: skyblue;
+    width: 210px;
+    margin-left: 70px;
+    opacity: 0.9;
+    font-size: 15px;
+}
+
+#checkCode {
+    width: 100px;
+}
+
+#img_check {
+    position: relative;
+    right: 10px;
+}

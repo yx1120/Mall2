@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的收藏-个人中心</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!--jquery-->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <style>
+        .workspace{
+            width:1400px;
+            margin:40px auto;
+        }
+        #edit_bar{
+            margin-bottom: 20px;
+        }
+
+        #add_btn{
+            width:120px;
+            /*float: right;*/
+            font-size: 15px;
+            font-weight: bold;
+            font-family: "微软雅黑";
+        }
+
+        #carousel_list{
+            background-color: #F8F8F8;
+        }
+
+        #carousel_list td{
+            font-size: 15px;
+            font-family: "微软雅黑";
+        }
+
+        .reason{
+            height: 120px;
+            line-height: 120px;
+        }
+        #carousel_list input[type='text']{
+            margin-top:45px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="workspace">
+       <div id="edit_bar">
+           <ol class="breadcrumb">
+               <form method="post" action="#" enctype="multipart/form-data">
+                   <table class="addTable">
+                       <tr>
+                           <td class="col-lg-2">
+                               <input accept="image/*" type="file" name="uploadImg"/>
+                           </td>
+                           <td class="col-lg-2">
+                               <input name="carouselUrl" type="text" class="form-control" placeholder="跳转地址...">
+                           </td>
+                           <td class=" col-lg-3">
+                               <input type="submit" id="add_btn" class="btn btn-danger " value="新增">
+                           </td>
+                       </tr>
+                   </table>
+
+               </form>
+           </ol>
+       </div>
+
+        <div id="carousel_list">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td class="col-lg-4">轮播图片</td>
+                        <td class="col-lg-3">跳转地址</td>
+                        <td class="col-lg-2">上传时间</td>
+                        <td class="col-lg-2">上传用户</td>
+                        <td class="col-lg-1">删除</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="img/lunbo/1.jpg" height="120px" class="img-rounded"></td>
+                        <td>
+                            <input type="text" value="http://www.baidu.com" class="form-control ">
+                        </td>
+                            </span>
+                        <td>
+                            <span class="reason">
+                                2020-6-1
+                            </span>
+                        </td>
+                        <td>
+                            <span class="reason">
+                              Tom
+                            </span>
+                        </td>
+                        <td>
+                            <span class="reason">
+                                <a deleteLink="true" href="admin_delete?cid=${c.cid}">
+                                <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </span>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td><img src="img/lunbo/2.jpg" height="120px"  class="img-rounded"></td>
+                        <td>
+                            <input type="text" value="http://www.google.com" class="form-control">
+                        </td>
+                        </span>
+                        <td>
+                            <span class="reason">
+                                2020-6-2
+                            </span>
+                        </td>
+                        <td>
+                            <span class="reason">
+                              Tom2
+                            </span>
+                        </td>
+                        <td>
+                            <span class="reason">
+                                <a deleteLink="true" href="admin_delete?cid=${c.cid}">
+                                <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </span>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

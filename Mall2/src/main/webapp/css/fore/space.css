@@ -1,0 +1,17 @@
+.workspace{
+    width:1300px;
+    margin:40px auto;
+}
+#left_nav{
+    width:200px;
+    float: left;
+    /*text-align: center;*/
+}
+#left_nav a{
+    padding-left: 40px;
+}
+#right_content{
+    margin-left: 20px;
+    width:1080px;
+    float: left;
+}

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+         http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--1,开启注解扫描
+        只扫描 @Controller注解
+    -->
+    <context:component-scan base-package="indi.xu.web.controller">
+    </context:component-scan>
+
+    <!-- 配置spring开启注解AOP的支持
+        属性；proxy-target-class="false"   表示使用jdk动态代理织入增强（默认
+                                 "true"    表示使用cglib动态代理织入
+    -->
+    <aop:aspectj-autoproxy/>
+
+    <!--2，视图解析器:内部资源视图解析器-->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <!--文件上传：配置文件解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--配置上传文件的最大字节-->
+        <property name="maxUploadSize" value="10485760"/>
+    </bean>
+
+    <!--配置异常处理器-->
+    <!--<category id="sysExceptionResolver" class="indi.xu.exception.SysExceptionResolver"/>-->
+
+    <!--3,配置过滤静态资源
+        注意：配置的拦截器，如果拦截所有   ：<mvc:mapping path="/**"/>
+        静态资源还是会被拦截的，有三种解决方法
+                1，使用默认的Servlet处理静态资源
+                2，
+    -->
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/img/**" location="/img/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/fonts/**" location="/fonts/"/>
+
+    <!--4,开启SpringMVC对注解的扫描-->
+    <!--4.1配置自定义参数类型转换器-->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+    <bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean" id="conversionService">
+        <property name="converters">
+            <set>
+                <ref bean="dateConverter"/>
+            </set>
+        </property>
+    </bean>
+
+    <!--  配置拦截器-->
+    <mvc:interceptors>
+        <!--（1）拦截前台需要用户登录的操作-->
+        <mvc:interceptor>
+            <!--<mvc:mapping path="/auth/*"/>-->
+            <mvc:mapping path="/mallOrder/*"/>
+            <mvc:mapping path="/space/*"/>
+            <mvc:mapping path="/shopCart/*"/>
+            <!--配置使用的拦截器类-->
+            <bean class="indi.xu.web.interceptor.AuthInterceptor"/>
+        </mvc:interceptor>
+
+        <!--（2）拦截管理员需要登录的操作-->
+        <mvc:interceptor>
+
+            <mvc:mapping path="/user/*"/>
+            <mvc:mapping path="/category/*"/>
+            <mvc:mapping path="/order/*"/>
+            <mvc:mapping path="/product/*"/>
+            <mvc:mapping path="/productImage/*"/>
+            <mvc:mapping path="/property/*"/>
+            <mvc:mapping path="/firstCategory/*"/>
+            <mvc:mapping path="/carousel/*"/>
+
+            <bean class="indi.xu.web.interceptor.BackInterceptor"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
+    <!--使用默认的静态资源 处理Servlet处理静态资源(涉及spring-mvc.xml, web.xml)-->
+    <mvc:default-servlet-handler/>
+
+</beans>

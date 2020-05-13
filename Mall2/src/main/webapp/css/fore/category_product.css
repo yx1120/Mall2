@@ -1,0 +1,220 @@
+div.category_products{
+    width:1200px;
+    margin:20px auto;
+}
+
+div.one_product{
+    float: left;
+    width:250px;
+    padding:12px;
+    border:3px solid #f3f4f6;
+    margin-right: 50px;
+    margin-bottom: 20px;
+}
+div.one_product:hover{
+    border:3px solid #C40000;
+}
+
+span.opp{
+    display: block;
+}
+div.down_info{
+    margin-top:5px;
+    height: 30px;
+    line-height: 30px;
+    border:1px solid silver;
+}
+div.down_info span{
+    display: inline-block;
+}
+div.down_info span:nth-child(1){
+    /*border-right: 1px solid silver;*/
+}
+span.one_product_price{
+    font-size: 20px;
+    color: #ff0036;
+}
+span.one_product_title a{
+    display: inline-block;
+    font-size: 12px;
+    color: black;
+    margin-bottom: 5px;
+}
+span.one_product_title a:hover{
+    color: #C40000;
+}
+span.info_01{
+    color: #b57c5b;
+    padding-right: 10px;
+    border-right: 1px solid silver;
+}
+span.info_02{
+    color: skyblue;
+    padding-right: 10px;
+    border-right: 1px solid silver;
+    width:50px;
+}
+span.tmtm{
+    font-size: 12px;
+    margin:3px 0;
+}
+span.info_img{
+    padding-left: 13px;
+}
+
+
+/*---------------------------分类排序条-------------------------------------*/
+/*---------------------------category_sortBar------------------------------*/
+div.category_SortBar {
+    width: 1200px;
+    margin: 20px auto;
+    /*border:1px solid red;*/
+    padding: 0 10px;
+    font-family: Arial, serif;
+    font-size: 12px;
+    background-color: #faf9f9;
+}
+
+div.category_SortBar table {
+    display: inline-block;
+    border-collapse: collapse;
+    margin-top: 4px;
+}
+
+div.category_SortBar a {
+    color: #806F66;
+}
+
+div.category_SortBar a:hover {
+    color: #c40000;
+}
+
+td.bgGray {
+    background-color: #F1EDEC;
+}
+
+div.category_SortBar table td {
+    border: 1px solid #cccccc;
+    padding: 3px;
+}
+
+#right_bar input {
+    /*隐藏边框*/
+    border-width: 0px;
+    height: 17px;
+    width: 50px;
+}
+
+#right_bar #mid_2_input {
+    width: 5px;
+    vertical-align: middle;
+    color: #cccccc;
+}
+
+#left_bar td:hover {
+    background-color: #F1EDEC;
+}
+
+div.category_SortBar #cate_img {
+    width: 1180px;
+}
+
+/* *********************点击一级分类后进入的商品列表******************************/
+/* *********************点击一级分类后进入的商品列表******************************/
+div.products_out_div {
+    background-color: #f5f5f5;
+    width: 1200px;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+div.row_end {
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+}
+
+div.row_end img {
+    height: 50px;
+}
+
+div.product {
+    float: left;
+    height: 280px;
+    width: 200px;
+    background-color: white;
+    margin-right: 10px;
+    /*border:1px solid red;*/
+    padding: 5px;
+}
+
+div.product a {
+    color: #a1a1a1;
+    font-size: 12px;
+}
+
+div.product a:hover {
+    color: #a1a1a1;
+    text-decoration: none;
+}
+
+div.product img {
+    width: 190px;
+}
+
+span.pro_price {
+    display: block;
+    font-size: 16px;
+    color: #ff0036;
+}
+
+span.pro_name {
+    display: block;
+    font-size: 12px;
+    font-family: Arial, serif;
+    margin: 12px 0;
+}
+
+span.tiao {
+    display: inline-block;
+    height: 30px;
+    vertical-align: top;
+    width: 5px;
+    background-color: #19C8A9;
+    margin-right: 10px;
+}
+
+div.row_products {
+    margin-left: 80px;
+    margin-bottom: 50px;
+}
+
+span.cate_name2 {
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+div.cate_name {
+    margin: 10px 0;
+}
+
+/*移动到图片上面的效果*/
+.product img:hover {
+    opacity: 0.7;
+}
+
+#more_info {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#more_info a {
+    color: gray;
+}
+
+#more_info a:hover {
+    text-decoration: none;
+    color: #ff002d;
+}

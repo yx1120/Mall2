@@ -1,0 +1,243 @@
+/* **********************************************最上面的导航条*/
+/* **********************************************最上面的导航条*/
+#right_nav_div{
+    float: right;
+}
+.home_color{
+    color:#ff002d;
+}
+.headNav{
+    font-size: 13px;
+    font-family: Arial,serif;
+    background-color: #f2f2f2;
+    height: 32px;
+    line-height: 34px;
+}
+div.left_nav_div a{
+    margin-right: 16px;
+    color:#a1a1a1;
+}
+#welcome{
+    margin-right: 16px;
+    color:#a1a1a1;
+}
+div.left_nav_div a:hover{
+    color:#ff002d;
+    text-decoration: none;
+}
+#img_code{
+    width:130px;
+    height: 130px;
+}
+
+/*手机版二维码，使用绝对定位*/
+div.code_div{
+    width:150px;
+    height: 150px;
+    padding: 10px;
+    border:solid #a1a1a1 1px;
+    position: absolute;
+    right: 400px;
+    display: none;
+    z-index: 1;
+}
+div.left_nav_div{
+    width:1200px;
+    margin:0 auto;
+}
+
+
+/*****************************************************轮播图*/
+/*****************************************************轮播图*/
+div.index_category {
+    width: 100%;
+    position: relative;
+    font-family: Arial,serif;
+}
+
+/*商品分类菜单控制*/
+.categoryMenu {
+    background-color: #ff0036;
+    float: left;
+    width: 200px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    padding-left: 10px;
+    /*text-align: center;*/
+}
+
+.rightMenu {
+    float: left;
+}
+
+/*天猫超市，天猫国际*/
+div.rightMenu img {
+    height: 32px;
+}
+
+div.rightMenu a {
+    margin: 0px 10px;
+    font-size: 16px;
+    height: 36px;
+    line-height: 36px;
+    color: black;
+}
+
+div.rightMenu a:hover {
+    color: #ff0036;
+}
+
+/*    装轮播图外面的div,
+把背景颜色设置成和图片一样的背景颜色*/
+div.lunbo {
+    background-color: #e8e8e8;
+    border-top: 2px solid #ff0036;
+    z-index: 1;
+}
+
+div.lunbo2 {
+    /*轮播div居中，加个宽度，然后margin:auto就完事了*/
+    /*border:1px solid red;*/
+    height: 520px;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#carousel_div{
+    height: 520px;
+}
+
+/*把最上面的菜单栏居中*/
+div.Menubar {
+    width: 1200px;
+    margin:auto;
+}
+
+
+/**********************************************************分类图*/
+/**********************************************************分类图*/
+/* 使用一个大div做相对定位，方便后面的绝对定位*/
+div.cate_right {
+    position: absolute;
+    top: 38px;
+    /*left: 152px;*/
+    left:0;
+    background-color: #e2e2e3;
+    width: 200px;
+    height: 520px;
+    margin-left: 0px;
+    z-index: 1;
+    opacity: 0.85;
+}
+
+/*一行行的*/
+span.block_span {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+}
+
+div.cate_right a {
+    color: black;
+}
+
+div.cate_right a:hover {
+    color: lightskyblue;
+    text-decoration: none;
+}
+
+span.block_span:hover {
+    background-color: white;
+}
+
+span.block_span span:nth-child(1) {
+    margin-right: 8px;
+    margin-left: 8px;
+}
+
+/*    右边详细内容css*/
+div.cate_detail {
+    padding-left: 20px;
+    padding-top: 20px;
+    width: 800px;
+    height: 520px;
+    position: absolute;
+    top: 38px;
+    left: 200px;
+    /*left: 552px;*/
+    background-color: white;
+    opacity: 0.90;
+    /*因为会放在轮播图上面*/
+    z-index: 1;
+}
+
+div.cate_detail a {
+    color: darkgray;
+    margin-right: 18px;
+    font-size: 16px;
+}
+
+div.cate_detail a:hover {
+    text-decoration: none;
+    color: #ff0036;
+}
+
+
+/*每行样式*/
+div.row_detail {
+    margin: 20px 80px;
+}
+
+div.seperator {
+    /*虚线样式*/
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
+    border-bottom-color: #e7e7e7;
+    margin-top: 20px;
+}
+
+/* *******************************************************搜素框*/
+/* *******************************************************搜素框*/
+#logo{
+    /*使用绝对定位，就不会占位置*/
+    position: absolute;
+    left: 350px;
+    top:30px;
+    z-index: -1;
+}
+#sea_div{
+    background-color: #ff0036;
+    width: 550px;
+    margin: 50px auto;
+    padding: 1px;
+    height: 40px;
+}
+
+#search{
+    width: 425px;
+    border: 1px solid transparent;
+    height: 34px;
+    margin: 1px;
+    /*去掉轮廓*/
+    outline:none;
+    padding:10px;
+}
+#sea_btn{
+    width: 110px;
+    border: 1px solid transparent;
+    background-color: #ff0036;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+.search_head{
+    /*border: 1px solid green;*/
+    width:1200px;
+    margin:0 auto;
+    font-size:13px;
+    font-family:Arial,serif;
+}
+
