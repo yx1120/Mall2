@@ -125,16 +125,15 @@ public class MallProductController {
             return "error/404";
         }
 
-        //用户未登录-->跳转登录
+        //如果用户已经登录，判断是否收藏了该商品
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "fore/login";
-        }
-        //判断是否收藏
         boolean isFavorite = false;
-        Favorite favorite = favoriteService.get(pid, user.getUid());
-        if (favorite != null) {
-            isFavorite = true;
+        if (user != null) {
+            //判断是否收藏
+            Favorite favorite = favoriteService.get(pid, user.getUid());
+            if (favorite != null) {
+                isFavorite = true;
+            }
         }
 
         List<PropertyValue> pvList = propertyValueService.list(pid);
