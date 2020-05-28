@@ -19,7 +19,7 @@
         <div class="panel-heading">新增商品</div>
         <div class="panel-body">
 
-            <form method="post" id="addForm" action="admin_update">
+            <form method="post" id="addForm" action="update">
                 <table class="editTable">
                     <tr>
                         <td class="cate_text">产品名称</td>

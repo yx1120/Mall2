@@ -25,7 +25,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/property")
+@RequestMapping("/admin")
 public class PropertyController {
 
     @Resource
@@ -33,7 +33,7 @@ public class PropertyController {
     @Resource
     private CategoryService categoryService;
 
-    @RequestMapping("admin_list")
+    @RequestMapping("property/list")
     public String list(Integer cid, Model model,
                        Integer row, Integer currentPage) {
 
@@ -60,7 +60,7 @@ public class PropertyController {
         return "admin/listProperty";
     }
 
-    @RequestMapping("admin_edit")
+    @RequestMapping("property/edit")
     public String edit(Integer pyid, Model model) {
 
         if (pyid < 0 || propertyService.get(pyid) == null) {
@@ -73,7 +73,7 @@ public class PropertyController {
         return "admin/editProperty";
     }
 
-    @RequestMapping("/admin_delete")
+    @RequestMapping("property/delete")
     public String delete(Integer pyid) {
 
         if (pyid < 0 || propertyService.get(pyid) == null) {
@@ -83,10 +83,10 @@ public class PropertyController {
         Integer cid = propertyService.get(pyid).getCategory().getCid();
         //先获取cid然后删除
         propertyService.delete(pyid);
-        return "redirect:admin_list?cid=" + cid;
+        return "redirect:list?cid=" + cid;
     }
 
-    @RequestMapping("admin_add")
+    @RequestMapping("property/add")
     public String add(@RequestParam(name = "cid") Integer cid,
                       @RequestParam(name = "pyname") String pyname) {
 
@@ -99,10 +99,10 @@ public class PropertyController {
         property.setPyname(pyname);
 
         propertyService.add(property);
-        return "redirect:admin_list?cid=" + cid;
+        return "redirect:list?cid=" + cid;
     }
 
-    @RequestMapping("admin_update")
+    @RequestMapping("property/update")
     public String update(String pyname, Integer pyid) {
 
         if (pyid < 0 || propertyService.get(pyid) == null || StringUtils.isBlank(pyname)) {
@@ -112,6 +112,6 @@ public class PropertyController {
         property.setPyname(pyname);
         propertyService.update(property);
 
-        return "redirect:admin_list?cid=" + property.getCategory().getCid();
+        return "redirect:list?cid=" + property.getCategory().getCid();
     }
 }

@@ -27,7 +27,7 @@
             //如果修改成功，返回Boolean fixOk = true;.    前端判断，if(fixOk) 改变边框为绿色
             var vid = $(this).attr("vid");
             var value = $(this).val();
-            $.post("admin_updatePropertyValue", {vid: vid, value: value}, function (data) {
+            $.post("updatePropertyValue", {vid: vid, value: value}, function (data) {
                 if (data == "update_OK") {
                     $(this).css("border", "2px solid green");
                 }
@@ -42,9 +42,9 @@
     <%--路径导航--BootStarp--%>
     <div class="myBread">
         <ol class="breadcrumb">
-            <li><a href="${pageContext.request.contextPath}/firstCategory/admin_list">所有分类</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/firstCategory/list">所有分类</a></li>
             <li>
-                <a href="${pageContext.request.contextPath}/product/admin_list?cid=${product.category.cid}">${product.category.cname}</a>
+                <a href="${pageContext.request.contextPath}/admin/product/list?cid=${product.category.cid}">${product.category.cname}</a>
             </li>
             <li class="active">${product.pname}</li>
         </ol>

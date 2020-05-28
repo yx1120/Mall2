@@ -60,7 +60,7 @@
     function pushCarousel(a) {
         var carouselId = $(a).attr("carouselId");
 
-        $.post("${pageContext.request.contextPath}/carousel/admin_push",{carouselId:carouselId},function (info) {
+        $.post("${pageContext.request.contextPath}/admin/carousel/push",{carouselId:carouselId},function (info) {
             if(info.flag){
                 if(info.info == "1"){
                     $(a).html('<span class="glyphicon glyphicon-ok addCol"></span>');
@@ -74,15 +74,21 @@
     function updateCarouselUrl(btn) {
         var carouselId = $(btn).attr("carouselId");
         var url = $("input[carouselId="+carouselId+"]").val();
-        // alert(url);
 
-        $.post("${pageContext.request.contextPath}/carousel/admin_update",{carouselId:carouselId,carouselUrl:url},function (info) {
+        $.post("${pageContext.request.contextPath}/admin/carousel/update",{carouselId:carouselId,carouselUrl:url},function (info) {
             if(info.flag){
                 $(btn).addClass("btn-success");
-                $(btn).html("O K")
+                $(btn).html("O K");
+
+                // 3s后恢复
+                setTimeout(function () {
+                    $(btn).removeClass("btn-success");
+                    $(btn).html("更新");
+                },2000);
             }
         });
     }
+
 </script>
 
 <title>轮播图管理</title>
@@ -91,7 +97,7 @@
 <div class="workArea">
     <div id="edit_bar">
         <ol class="breadcrumb">
-            <form method="post" action="admin_add" enctype="multipart/form-data" id="addForm">
+            <form method="post" action="add" enctype="multipart/form-data" id="addForm">
                 <table class="addTable">
                     <tr>
                         <td class="col-lg-2">
@@ -161,7 +167,7 @@
                     </td>
                     <td>
                         <span class="reason">
-                             <a deleteLink="true" href="admin_delete?carouselId=${carousel.carouselId}">
+                             <a deleteLink="true" href="delete?carouselId=${carousel.carouselId}">
                                  <span class="glyphicon glyphicon-trash"></span>
                              </a>
                         </span>

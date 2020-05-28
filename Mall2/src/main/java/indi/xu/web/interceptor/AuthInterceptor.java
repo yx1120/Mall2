@@ -21,8 +21,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     /**
      * 预处理：在Controller方法执行之前执行
-     * 返回true:放行，进入下一个拦截器  （（如果没有，执行controlLer中的方法
-     * 返回false:不放行
+     *      返回true:放行，进入下一个拦截器  （（如果没有，执行controlLer中的方法
+     *      返回false:不放行
      * <p>
      * 登录判断
      */

@@ -77,3 +77,19 @@ button.login_btn2 {
     position: relative;
     right: 10px;
 }
+
+#reg_div{
+    float: right;
+    /*border: 1px solid rebeccapurple;*/
+}
+#reg_div a{
+    color: deeppink;
+    font-family: "微软雅黑";
+}
+
+#reg_div a:hover{
+    text-decoration:none;
+    color: red;
+    font-weight: bold;
+}
+

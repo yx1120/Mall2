@@ -24,7 +24,7 @@ import java.util.List;
  * @create 2020-03-31 13:22
  */
 @Controller
-@RequestMapping("/firstCategory")
+@RequestMapping("/admin")
 public class FirstCategoryController {
 
     @Resource
@@ -50,7 +50,7 @@ public class FirstCategoryController {
     }
 
 
-    @RequestMapping("/admin_list")
+    @RequestMapping("firstCategory/list")
     public String list(Model model, Integer row, Integer currentPage) {
 
         PageVo pv = new PageVo(row, currentPage);
@@ -65,7 +65,7 @@ public class FirstCategoryController {
         return "admin/listFirstCategory";
     }
 
-    @RequestMapping("/admin_delete")
+    @RequestMapping("firstCategory/delete")
     public String delete(Integer cid) {
         if (cid < 0 || categoryService.get(cid) == null) {
             return "error/500";
@@ -73,11 +73,11 @@ public class FirstCategoryController {
         //要先删除这个分类下面的所有二级。。
         categoryService.delete(cid);
         updateCache();
-        return "redirect:admin_list";
+        return "redirect:list";
     }
 
     //添加一级分类
-    @RequestMapping("/admin_add")
+    @RequestMapping("firstCategory/add")
     public String add(String cname) {
         if (StringUtils.isBlank(cname) || categoryService.findByName(cname) != null) {
             return "redirect:admin_list";
@@ -93,11 +93,11 @@ public class FirstCategoryController {
         categoryService.add(firstCategory);
         updateCache();
 
-        return "redirect:admin_list";
+        return "redirect:list";
     }
 
     //更新一级分类
-    @RequestMapping("/admin_update")
+    @RequestMapping("firstCategory/update")
     @ResponseBody
     public ResultInfo update(Category category) {
         ResultInfo info = new ResultInfo();

@@ -18,10 +18,10 @@
             <span class="glyphicon glyphicon-home" title="主页"></span>
         </a>
 
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/firstCategory/admin_list">分类管理</a>
-		<a class="navbar-brand" href="${pageContext.request.contextPath}/user/admin_list">用户管理</a>
-		<a class="navbar-brand" href="${pageContext.request.contextPath}/order/admin_list">订单管理</a>
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/carousel/admin_list">轮播图</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/firstCategory/list">分类管理</a>
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/admin/user/list">用户管理</a>
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/admin/order/list">订单管理</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/carousel/list">轮播图</a>
 
         <a class="navbar-brand" href="${pageContext.request.contextPath}/fore/toAdminLogout" id="logout">
             <span class="glyphicon glyphicon-off" title="注销"></span>

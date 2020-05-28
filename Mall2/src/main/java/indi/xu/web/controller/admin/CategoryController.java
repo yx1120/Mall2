@@ -31,7 +31,7 @@ import java.util.List;
  * @create 2020-02-28 20:03
  */
 @Controller
-@RequestMapping("/category")
+@RequestMapping("/admin")
 public class CategoryController {
 
     @Resource
@@ -57,7 +57,7 @@ public class CategoryController {
     /**
      * 根据一级分类查找二级分类
      */
-    @RequestMapping("/admin_list")
+    @RequestMapping("category/list")
     public String list(Model model, Integer row, Integer currentPage, @RequestParam("parentId") Integer parentId) {
 
 
@@ -79,7 +79,7 @@ public class CategoryController {
         return "admin/listCategory";
     }
 
-    @RequestMapping("/admin_delete")
+    @RequestMapping("category/delete")
     public String delete(Integer cid) {
 
         if (cid < 0 || categoryService.get(cid) == null) {
@@ -92,24 +92,13 @@ public class CategoryController {
         categoryService.delete(cid);
         //刷新缓存
         updateCache(parentId);
-        return "redirect:admin_list?parentId=" + parentId;
-    }
-
-    @RequestMapping("/admin_edit")
-    public String edit(Model model, Integer cid) {
-        if (cid < 0 || categoryService.get(cid) == null) {
-            return "error/500";
-        }
-
-        Category category = categoryService.get(cid);
-        model.addAttribute("bean", category);
-        return "admin/editCategory";
+        return "redirect:list?parentId=" + parentId;
     }
 
     /**
      * 添加二级分类，需要刷新redis缓存
      */
-    @RequestMapping("/admin_add")
+    @RequestMapping("category/add")
     public String add(@RequestParam("cname") String cname,@RequestParam("parentId") Integer parentId)  {
         if(categoryService.get(parentId) == null
                 ||StringUtils.isBlank(cname) ||categoryService.findByName(cname)!=null){
@@ -126,11 +115,11 @@ public class CategoryController {
         categoryService.add(bean);
         updateCache(bean.getParentCategory().getCid());
 
-        return "redirect:admin_list?parentId="+parentId;
+        return "redirect:list?parentId="+parentId;
     }
 
     //更新二级分类
-    @RequestMapping("/admin_update")
+    @RequestMapping("category/update")
     @ResponseBody
     public ResultInfo update(@RequestParam("cid") Integer cid,@RequestParam("cname") String cname) {
         ResultInfo info = new ResultInfo();

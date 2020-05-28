@@ -25,7 +25,7 @@
     <%--路径导航--BootStarp--%>
     <div class="myBread">
         <ol class="breadcrumb">
-            <li><a href="admin_list?cid=${bean.category.cid}">属性列表</a></li>
+            <li><a href="list?cid=${bean.category.cid}">属性列表</a></li>
             <li class="active">编辑属性</li>
         </ol>
     </div>
@@ -36,7 +36,7 @@
         <div class="panel-heading">编辑属性</div>
         <%--	BootStrap-面板体。--%>
         <div class="panel-body">
-            <form method="post" id="editForm" action="admin_update">
+            <form method="post" id="editForm" action="update">
                 <table class="editTable">
                     <tr>
                         <td class="cate_text">属性名称</td>

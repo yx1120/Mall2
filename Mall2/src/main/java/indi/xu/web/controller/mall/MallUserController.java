@@ -237,7 +237,7 @@ public class MallUserController {
 
         //添加到session
         session.setAttribute("adUser", adUser);
-        return "redirect:../firstCategory/admin_list";
+        return "redirect:../admin/firstCategory/list";
 
     }
 

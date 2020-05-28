@@ -30,7 +30,7 @@ import java.util.List;
  * @create 2020-03-02 19:06
  */
 @Controller
-@RequestMapping("/productImage")
+@RequestMapping("/admin")
 public class ProductImageController {
 
     @Resource
@@ -38,7 +38,7 @@ public class ProductImageController {
     @Resource
     private ProductService productService;
 
-    @RequestMapping("/admin_list")
+    @RequestMapping("productImage/list")
     public String list(Integer pid, Model model) {
         if (pid < 0 || productService.get(pid) == null) {
             return "error/500";
@@ -54,7 +54,7 @@ public class ProductImageController {
         return "admin/listProductImage";
     }
 
-    @RequestMapping("/admin_delete")
+    @RequestMapping("productImage/delete")
     public String delete(@RequestParam(name = "gid") Integer gid,
                          @RequestParam(name = "pid") Integer pid) {
 
@@ -63,11 +63,11 @@ public class ProductImageController {
             return "error/500";
         }
         productImageService.delete(gid);
-        return "redirect:admin_list?pid=" + pid;
+        return "redirect:list?pid=" + pid;
     }
 
     //上传图片
-    @RequestMapping("/admin_addProductImg")
+    @RequestMapping("productImage/addProductImg")
     public String addSingleImg(HttpServletRequest request,
                                MultipartFile uploadImg,
                                @RequestParam(name = "pid") Integer pid,
@@ -120,7 +120,7 @@ public class ProductImageController {
             ImageUtil.resizeImage(singleImg, MallConstant.SINGLE_IMG_MIDDLE_WIDTH, MallConstant.SINGLE_IMG_MIDDLE_HEIGHT, singleImg_middle);
         }
 
-        return "redirect:admin_list?pid=" + pid;
+        return "redirect:list?pid=" + pid;
     }
 
 

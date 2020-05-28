@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/admin")
 public class OrderController {
 
     @Resource
@@ -32,7 +32,7 @@ public class OrderController {
     private OrderItemService orderItemService;
 
 
-    @RequestMapping("/admin_list")
+    @RequestMapping("order/list")
     public String list(Model model, Integer row, Integer currentPage) {
         PageVo pv = new PageVo(row, currentPage);
         PageUtil.checkAdminPv(pv);
@@ -52,7 +52,7 @@ public class OrderController {
     /**
      * 发货
      */
-    @RequestMapping("/admin_deliveryOrder")
+    @RequestMapping("order/deliveryOrder")
     public String deliveryOrder(Integer oid) {
 
         if (oid < 0 || orderService.get(oid) == null) {
@@ -66,6 +66,6 @@ public class OrderController {
         orderService.update(order);
 
         //重定向管理员订单管理页面
-        return "redirect:admin_list";
+        return "redirect:list";
     }
 }

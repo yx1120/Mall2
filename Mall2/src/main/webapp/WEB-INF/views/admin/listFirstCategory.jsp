@@ -27,7 +27,7 @@
 
        // alert(cid+"..."+cname+"...");
 
-       $.post("${pageContext.request.contextPath}/firstCategory/admin_update",{cid:cid,cname:cname},function (info) {
+       $.post("${pageContext.request.contextPath}/admin/firstCategory/update",{cid:cid,cname:cname},function (info) {
            if(info.flag){
                $(btn).addClass("btn-success");
                $(btn).html("O K");
@@ -42,15 +42,13 @@
 <div class="workArea">
     <div class=" myBread">
         <ol class="breadcrumb">
-            <%--<li><span>所有分类</span></li>--%>
             <div id="add_level1">
-                <form method="post" id="addForm" action="admin_add">
+                <form method="post" id="addForm" action="add">
                     <table class="addTable">
                         <tr>
                             <td class="cate_text">分类名称</td>
                             <td><input name="cname" type="text" class="form-control" placeholder="输入一级分类名称"></td>
                             <td colspan="2" align="center">
-                                <%--<input name="categoryLevel" value="1" hidden/>--%>
                                 <button type="submit" class="btn btn-danger">新 增</button>
                             </td>
                         </tr>
@@ -76,7 +74,7 @@
                         <%--<td>${vs.count}</td>--%>
                     <td class="col-lg-7">
                         <a class="fc_name"
-                           href="${pageContext.request.contextPath}/category/admin_list?parentId=${f.cid}" cid2="${f.cid}">${f.cname}
+                           href="${pageContext.request.contextPath}/admin/category/list?parentId=${f.cid}" cid2="${f.cid}">${f.cname}
                         </a>
                     </td>
 
@@ -104,7 +102,7 @@
                     </td>
 
                     <td class="col-lg-2">
-                        <a deleteLink="true" href="admin_delete?cid=${f.cid}">
+                        <a deleteLink="true" href="delete?cid=${f.cid}">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </td>
@@ -127,7 +125,6 @@
     $(function () {
         $("#addForm").submit(function () {
             if ($("input[name='cname']").val().length == 0) {
-                // alert("xxx");
                 return false;
             }
         });

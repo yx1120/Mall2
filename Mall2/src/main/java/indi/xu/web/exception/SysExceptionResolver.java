@@ -1,4 +1,4 @@
-package indi.xu.exception;
+package indi.xu.web.exception;
 
 import indi.xu.domain.Log;
 import indi.xu.service.LogService;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 /**
- * 异常处理器，代理Controller层的抛出的异常，都会到这里
- * 处理异常，记录错误日志
+ * 全局异常处理器，代理Controller层的抛出的异常，自定义抛出的异常，都会到这里
+ *      作用：记录错误日志
  *
  * @author a_apple
  * @create 2020-03-03 12:52

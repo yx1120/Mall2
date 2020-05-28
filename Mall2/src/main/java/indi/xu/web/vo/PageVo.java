@@ -3,6 +3,7 @@ package indi.xu.web.vo;
 /**
  * @author a_apple
  * @create 2020-04-17 9:48
+ *
  */
 public class PageVo {
 

@@ -232,6 +232,13 @@
       <version>${commons.version}</version>
     </dependency>
 
+    <!--  集成阿里云短信服务-->
+    <!--阿里云SDK依赖-->
+    <dependency>
+      <groupId>com.aliyun</groupId>
+      <artifactId>aliyun-java-sdk-core</artifactId>
+      <version>4.5.0</version>
+    </dependency>
   </dependencies>
 
   <build>

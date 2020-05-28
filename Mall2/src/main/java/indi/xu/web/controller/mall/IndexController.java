@@ -58,7 +58,7 @@ public class IndexController {
     @RequestMapping("/adminLogin")
     public String adminLogin(@SessionAttribute(required = false) AdminUser adUser) {
         if(adUser!=null){
-            return "redirect:../firstCategory/admin_list";
+            return "redirect:../admin/firstCategory/list";
         }
         return "fore/adminLogin";
     }

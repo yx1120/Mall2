@@ -107,6 +107,7 @@
         <div id="formId">
             <form action="#" method="post" id="login_form">
                 <table>
+
                     <tr>
                         <td><span class="login_txt">手机号</span></td>
                         <td colspan="2"><input type="text" class="form-control " placeholder="输入手机号"
@@ -133,19 +134,20 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <button type="submit" class="btn btn-default login_btn">登录
-                            </button>
-                            <button type="submit" class="btn btn-default login_btn3"><a href="${pageContext.request.contextPath}/fore/register">注册</a>
-                            </button>
+                            <button type="submit" class="btn btn-default login_btn">登录</button>
                         </td>
-                        <td></td>
+                        <td>
+                            <a href="#">短信登录</a>
+                        </td>
 
-                        <td></td>
                         <td></td>
                     </tr>
                 </table>
             </form>
 
+            <div id="reg_div">
+                <a href="${pageContext.request.contextPath}/fore/register">注册账号</a>
+            </div>
         </div>
     </div>
 </div>

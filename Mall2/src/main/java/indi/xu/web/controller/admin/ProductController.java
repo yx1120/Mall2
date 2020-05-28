@@ -23,7 +23,7 @@ import java.util.List;
  * @create 2020-02-28 20:03
  */
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/admin")
 public class ProductController {
 
     @Resource
@@ -37,7 +37,7 @@ public class ProductController {
     @Resource
     private PropertyService propertyService;
 
-    @RequestMapping("/admin_list")
+    @RequestMapping("product/list")
     public String list(Integer cid, Model model, Integer row, Integer currentPage) {
 
         if (cid < 0 || categoryService.get(cid) == null) {
@@ -62,7 +62,7 @@ public class ProductController {
         return "admin/listProduct";
     }
 
-    @RequestMapping("admin_delete")
+    @RequestMapping("product/delete")
     public String delete(Integer pid) {
 
         if (pid < 0 || productService.get(pid) == null) {
@@ -71,7 +71,8 @@ public class ProductController {
 
         Integer cid = productService.get(pid).getCategory().getCid();
 
-        //事务，因为有外键关联，所以删除一个商品先删除商品的所有图片
+        // 事务，因为有外键关联，所以删除一个商品先删除商品的所有图片
+        // 还有商品的属性值
         List<ProductImage> singleList = productImageService.list(pid, ProductImageService.TYPE_SINGLE);
         List<ProductImage> detailsList = productImageService.list(pid, ProductImageService.TYPE_DETAIL);
         for (ProductImage image : detailsList) {
@@ -82,10 +83,10 @@ public class ProductController {
         }
 
         productService.delete(pid);
-        return "redirect:admin_list?cid=" + cid;
+        return "redirect:list?cid=" + cid;
     }
 
-    @RequestMapping("admin_edit")
+    @RequestMapping("product/edit")
     public String edit(Integer pid, Model model) {
 
         if (pid < 0 || productService.get(pid) == null) {
@@ -96,7 +97,7 @@ public class ProductController {
         return "admin/editProduct";
     }
 
-    @RequestMapping("admin_add")
+    @RequestMapping("product/add")
     public String add(Product product, @RequestParam(name = "cid") Integer cid) {
 
         if (product == null
@@ -110,10 +111,10 @@ public class ProductController {
         product.setCategory(category);
 
         productService.add(product);
-        return "redirect:admin_list?cid=" + cid;
+        return "redirect:list?cid=" + cid;
     }
 
-    @RequestMapping("admin_update")
+    @RequestMapping("product/update")
     public String update(Product product, @RequestParam(name = "cid") Integer cid) {
 
         if (product == null
@@ -127,10 +128,10 @@ public class ProductController {
         product.setCategory(category);
 
         productService.update(product);
-        return "redirect:admin_list?cid=" + cid;
+        return "redirect:list?cid=" + cid;
     }
 
-    @RequestMapping("admin_editPropertyValue")
+    @RequestMapping("product/editPropertyValue")
     public String editPropertyValue(Integer pid, Model model) {
 
         if (pid < 0 || productService.get(pid) == null) {
@@ -159,7 +160,7 @@ public class ProductController {
         return "admin/editPropertyValue";
     }
 
-    @RequestMapping("admin_updatePropertyValue")
+    @RequestMapping("product/updatePropertyValue")
     @ResponseBody
     public String updatePropertyValue(PropertyValue bean) {
         if (bean == null || StringUtils.isBlank(bean.getValue()) || bean.getVid() < 0) {

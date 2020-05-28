@@ -27,7 +27,7 @@
         //发货
         $(".deliveryBtn").click(function () {
             let oid = $(this).attr("oid");
-            location.href = "${pageContext.request.contextPath}/order/admin_deliveryOrder?oid="+oid+"";
+            location.href = "${pageContext.request.contextPath}/admin/order/deliveryOrder?oid="+oid+"";
         });
     });
 

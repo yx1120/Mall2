@@ -17,9 +17,9 @@
 <div class="workArea">
     <div class="myBread">
         <ol class="breadcrumb">
-            <li><a href="${pageContext.request.contextPath}/firstCategory/admin_list">所有分类</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/firstCategory/list">所有分类</a></li>
             <li>
-                <a href="${pageContext.request.contextPath}/category/admin_list?parentId=${category.parentCategory.cid}">${category.parentCategory.cname}</a>
+                <a href="${pageContext.request.contextPath}/admin/category/list?parentId=${category.parentCategory.cid}">${category.parentCategory.cname}</a>
             </li>
             <li class="active">${category.cname}</li>
         </ol>
@@ -55,15 +55,15 @@
                     <td>${p.stock}</td>
 
                     <!--图片管理-->
-                    <td><a href="${pageContext.request.contextPath}/productImage/admin_list?pid=${p.pid}"><span
+                    <td><a href="${pageContext.request.contextPath}/admin/productImage/list?pid=${p.pid}"><span
                             class="glyphicon glyphicon-picture"></span></a></td>
                         <%--设置属性--%>
-                    <td><a href="admin_editPropertyValue?pid=${p.pid}"><span
+                    <td><a href="editPropertyValue?pid=${p.pid}"><span
                             class="glyphicon glyphicon-list"></span></a></td>
 
-                    <td><a href="admin_edit?pid=${p.pid}"><span class="glyphicon glyphicon-edit"></span></a>
+                    <td><a href="edit?pid=${p.pid}"><span class="glyphicon glyphicon-edit"></span></a>
                     </td>
-                    <td><a deleteLink="true" href="admin_delete?pid=${p.pid}"><span
+                    <td><a deleteLink="true" href="delete?pid=${p.pid}"><span
                             class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
             </c:forEach>
@@ -81,7 +81,7 @@
         <div class="panel-heading">新增商品</div>
         <div class="panel-body">
 
-            <form method="post" id="addForm" action="admin_add">
+            <form method="post" id="addForm" action="add">
                 <table class="addTable">
                     <tr>
                         <td class="cate_text">产品名称</td>

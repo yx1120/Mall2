@@ -21,13 +21,13 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/admin")
 public class UserController {
 
     @Resource
     private UserService userService;
 
-    @RequestMapping("/admin_list")
+    @RequestMapping("user/list")
     public String list(Model model, Integer row, Integer currentPage) {
 
         PageVo pv = new PageVo(row, currentPage);

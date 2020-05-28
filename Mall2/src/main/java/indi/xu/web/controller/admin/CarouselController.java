@@ -28,7 +28,7 @@ import java.util.List;
  * @create 2020-05-07 13:18
  */
 @Controller
-@RequestMapping("/carousel")
+@RequestMapping("/admin")
 public class CarouselController {
 
     @Resource
@@ -37,7 +37,7 @@ public class CarouselController {
     /**
      * 轮播图列表
      */
-    @RequestMapping("/admin_list")
+    @RequestMapping("carousel/list")
     public String list(Model model, Integer row, Integer currentPage) {
         PageVo pv = new PageVo(row, currentPage);
         PageUtil.checkAdminPv(pv);
@@ -51,7 +51,10 @@ public class CarouselController {
         return "admin/listCarousel";
     }
 
-    @RequestMapping("/admin_push")
+    /**
+     * 推送/取消推送 轮播图
+     */
+    @RequestMapping("carousel/push")
     @ResponseBody
     public ResultInfo pushCarousel(Integer carouselId) {
         ResultInfo info = new ResultInfo();
@@ -79,7 +82,7 @@ public class CarouselController {
     /**
      * 添加轮播图
      */
-    @RequestMapping("/admin_add")
+    @RequestMapping("carousel/add")
     public String add(HttpServletRequest request, MultipartFile uploadImg, @SessionAttribute AdminUser adUser) throws Exception {
 
         System.out.println("上传轮播图...");
@@ -114,19 +117,19 @@ public class CarouselController {
         //上传文件
         uploadImg.transferTo(new File(path, filename));
 
-        return "redirect:admin_list";
+        return "redirect:list";
     }
 
-    @RequestMapping("/admin_delete")
+    @RequestMapping("carousel/delete")
     public String delete(Integer carouselId) {
         if (carouselId == null || carouselService.get(carouselId) == null) {
-            return "redirect:admin_list";
+            return "redirect:list";
         }
         carouselService.delete(carouselId);
-        return "redirect:admin_list";
+        return "redirect:list";
     }
 
-    @RequestMapping("/admin_update")
+    @RequestMapping("carousel/update")
     @ResponseBody
     public ResultInfo updateUrl(Integer carouselId, String carouselUrl) {
         ResultInfo info = new ResultInfo();

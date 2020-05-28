@@ -40,13 +40,14 @@
     </bean>
 
     <!--配置异常处理器-->
-    <!--<category id="sysExceptionResolver" class="indi.xu.exception.SysExceptionResolver"/>-->
+    <!--<category id="sysExceptionResolver" class="indi.xu.web.exception.SysExceptionResolver"/>-->
 
     <!--3,配置过滤静态资源
         注意：配置的拦截器，如果拦截所有   ：<mvc:mapping path="/**"/>
         静态资源还是会被拦截的，有三种解决方法
                 1，使用默认的Servlet处理静态资源
-                2，
+                2，全部使用 *.do 结尾
+                3. 拦截器一个一个配
     -->
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/img/**" location="/img/"/>
@@ -66,7 +67,7 @@
 
     <!--  配置拦截器-->
     <mvc:interceptors>
-        <!--（1）拦截前台需要用户登录的操作-->
+        <!-- 1.拦截前台需要用户登录的操作-->
         <mvc:interceptor>
             <!--<mvc:mapping path="/auth/*"/>-->
             <mvc:mapping path="/mallOrder/*"/>
@@ -76,18 +77,9 @@
             <bean class="indi.xu.web.interceptor.AuthInterceptor"/>
         </mvc:interceptor>
 
-        <!--（2）拦截管理员需要登录的操作-->
+        <!-- 2.拦截后台管理员需要登录的操作-->
         <mvc:interceptor>
-
-            <mvc:mapping path="/user/*"/>
-            <mvc:mapping path="/category/*"/>
-            <mvc:mapping path="/order/*"/>
-            <mvc:mapping path="/product/*"/>
-            <mvc:mapping path="/productImage/*"/>
-            <mvc:mapping path="/property/*"/>
-            <mvc:mapping path="/firstCategory/*"/>
-            <mvc:mapping path="/carousel/*"/>
-
+            <mvc:mapping path="/admin/**"/>
             <bean class="indi.xu.web.interceptor.BackInterceptor"/>
         </mvc:interceptor>
 

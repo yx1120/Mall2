@@ -16,7 +16,7 @@
 <div class="workArea">
     <div class=" myBread">
         <ol class="breadcrumb">
-            <li><a href="${pageContext.request.contextPath}/firstCategory/admin_list">所有分类</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/firstCategory/list">所有分类</a></li>
             <li class="active">${category.cname}</li>
             <li class="active">属性</li>
         </ol>
@@ -39,10 +39,10 @@
                         <%--<td>${vs.count}</td>--%>
                     <td>${p.pyname}</td>
                     <td>
-                        <a href="admin_edit?pyid=${p.pyid}"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="edit?pyid=${p.pyid}"><span class="glyphicon glyphicon-edit"></span></a>
                     </td>
                     <td>
-                        <a deleteLink="true" href="admin_delete?pyid=${p.pyid}"><span
+                        <a deleteLink="true" href="delete?pyid=${p.pyid}"><span
                                 class="glyphicon glyphicon-trash"></span></a>
                     </td>
                 </tr>
@@ -61,7 +61,7 @@
         <div class="panel-heading">新增属性</div>
         <div class="panel-body">
 
-            <form method="post" id="addForm" action="admin_add">
+            <form method="post" id="addForm" action="add">
                 <table class="addTable">
                     <tr>
                         <td class="cate_text">属性名称</td>

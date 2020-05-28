@@ -43,7 +43,7 @@
 
         // alert(cid+"..."+cname+"...");
 
-        $.post("${pageContext.request.contextPath}/category/admin_update",{cid:cid,cname:cname},function (info) {
+        $.post("${pageContext.request.contextPath}/admin/category/update",{cid:cid,cname:cname},function (info) {
             if(info.flag){
                 $(btn).addClass("btn-success");
                 $(btn).html("O K");
@@ -64,14 +64,14 @@
 <div class="workArea">
     <div class="myBread">
         <ol class="breadcrumb">
-            <li><a href="${pageContext.request.contextPath}/firstCategory/admin_list">所有分类</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/firstCategory/list">所有分类</a></li>
             <li><a href="#">${parentCategory.cname}</a></li>
 
         </ol>
 
         <ol class="breadcrumb">
             <div >
-                <form method="post" id="addForm" action="admin_add">
+                <form method="post" id="addForm" action="add">
                     <table class="addTable">
                         <tr>
                             <td class="cate_text">分类名称</td>
@@ -109,18 +109,18 @@
 
                 <tr class="row">
                     <td>
-                        <a href="${pageContext.request.contextPath}/product/admin_list?cid=${c.cid}">
+                        <a href="${pageContext.request.contextPath}/admin/product/list?cid=${c.cid}">
                                 ${c.cname}
                         </a>
                     </td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/property/admin_list?cid=${c.cid}">
+                        <a href="${pageContext.request.contextPath}/admin/property/list?cid=${c.cid}">
                             <span class="glyphicon glyphicon-th-list"></span>
                         </a>
                     </td>
                         <%--产品管理--%>
                     <td>
-                        <a href="${pageContext.request.contextPath}/product/admin_list?cid=${c.cid}">
+                        <a href="${pageContext.request.contextPath}/admin/product/list?cid=${c.cid}">
                             <span class="glyphicon glyphicon-shopping-cart"></span>
                         </a>
                     </td>
@@ -149,7 +149,7 @@
                     </td>
 
                     <td>
-                        <a deleteLink="true" href="admin_delete?cid=${c.cid}">
+                        <a deleteLink="true" href="delete?cid=${c.cid}">
                                 <%--“删除”图标--%>
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>

@@ -41,8 +41,8 @@
 
             <c:forEach items="${list}" var="u" varStatus="vs">
                 <tr class="row">
-                        <%--<td class="col-lg-6">${vs.count}</td>--%>
-                    <td class="col-lg-12">${u.uname}</td>
+                    <td class="col-lg-1">${vs.count}</td>
+                    <td class="col-lg-11">${u.uname}</td>
                 </tr>
             </c:forEach>
             </tbody>

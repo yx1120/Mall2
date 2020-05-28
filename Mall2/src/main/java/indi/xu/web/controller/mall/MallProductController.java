@@ -67,7 +67,6 @@ public class MallProductController {
 
         Category category = null;
         if (cid == null || cid <= 0 || (category = categoryService.get(cid)) == null) {
-            //填充商品
             model.addAttribute("category", null);
             return "fore/category/category_products";
         }
@@ -91,7 +90,7 @@ public class MallProductController {
             case "saleCount":
                 products.sort((x, y) -> y.getSaleCount() - x.getSaleCount());
                 break;
-            default: //"all"   如何输入其他字符也是这个
+            default: //"all"   其他字符也是这个
                 products.sort((x, y) -> y.getSaleCount() - x.getSaleCount());
                 break;
         }
@@ -115,7 +114,7 @@ public class MallProductController {
     }
 
     /**
-     * 某个商品详情
+     * 点击进入商品详情
      */
     @RequestMapping("/product/{pid}")
     public String product(@PathVariable Integer pid, Model model, HttpSession session) {

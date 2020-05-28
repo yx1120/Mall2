@@ -27,9 +27,9 @@
 <div class="workArea">
     <div class="myBread">
         <ol class="breadcrumb">
-            <li><a href="${pageContext.request.contextPath}/firstCategory/admin_list">所有分类</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/firstCategory/list">所有分类</a></li>
             <li>
-                <a href="${pageContext.request.contextPath}/product/admin_list?cid=${product.category.cid}">${product.category.cname}</a>
+                <a href="${pageContext.request.contextPath}/admin/product/list?cid=${product.category.cid}">${product.category.cname}</a>
             </li>
             <li class="active">${product.pname}</li>
         </ol>
@@ -60,7 +60,7 @@
                                 </td>
                                 <td>
                                     <a deleteLink="true"
-                                       href="admin_delete?gid=${g.gid}&pid=${product.pid}"><span
+                                       href="delete?gid=${g.gid}&pid=${product.pid}"><span
                                             class="glyphicon glyphicon-trash"></span></a>
                                 </td>
                             </tr>
@@ -87,7 +87,7 @@
                                 </td>
                                 <td>
                                     <a deleteLink="true"
-                                       href="admin_delete?gid=${g.gid}&pid=${product.pid}"><span
+                                       href="delete?gid=${g.gid}&pid=${product.pid}"><span
                                             class="glyphicon glyphicon-trash"></span></a>
                                 </td>
                             </tr>
@@ -104,7 +104,7 @@
                         <div class="panel-heading">新增&nbsp<span class="img_title">单个</span>&nbsp图片</div>
                         <div class="panel-body">
 
-                            <form method="post" id="addForm2" action="admin_addProductImg"
+                            <form method="post" id="addForm2" action="addProductImg"
                                   enctype="multipart/form-data">
                                 <table class="addTable">
 
@@ -134,7 +134,7 @@
                         <div class="panel-heading">新增&nbsp<span class="img_title">详情</span>&nbsp图片</div>
                         <div class="panel-body">
 
-                            <form method="post" id="addForm3" action="admin_addProductImg"
+                            <form method="post" id="addForm3" action="addProductImg"
                                   enctype="multipart/form-data">
                                 <table class="addTable">
                                     <tr>
