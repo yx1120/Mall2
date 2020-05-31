@@ -43,8 +43,6 @@ public class PersonalController {
     private OrderService orderService;
     @Resource
     private OrderItemService orderItemService;
-    @Resource
-    private MoodService moodService;
 
     /**
      * 个人中心
@@ -144,18 +142,6 @@ public class PersonalController {
         List<Favorite> list = favoriteService.list(user.getUid());
         model.addAttribute("list", list);
         return "fore/space/space-collection";
-    }
-
-    /**
-     * 我的动态
-     */
-    @SystemControllerLog(description = "进入我的动态", actionType = "info")
-    @RequestMapping("/myMoods")
-    public String myMoods(@SessionAttribute User user, Model model) {
-
-        List<Mood> moods = moodService.listByUid(user.getUid());
-        model.addAttribute("moods", moods);
-        return "fore/space/space-mood";
     }
 
     /**

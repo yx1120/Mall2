@@ -29,6 +29,13 @@ public class MallConstant {
     //默认的当前页码
     public static final int DEFAULT_CURRENT_PAGE = 1;
 
+    // 手机验证码位数
+    public static final int PHONE_CHECK_CODE_NUM = 6;
+    public static String TEMPLATE_CODE = "SMS_190282724";
+
+    //验证码位数
+    public static final int CHECK_CODE_NUM = 4;
+
     //验证码的长宽
     public static final int CHECK_CODE_WIDTH = 80;
     public static final int CHECK_CODE_HEIGHT = 30;

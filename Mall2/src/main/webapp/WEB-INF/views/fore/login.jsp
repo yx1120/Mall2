@@ -23,6 +23,54 @@
     <script>
         $(function () {
 
+            // 发送验证码
+            $("#askPhoneCheckCode").click(function () {
+                // .1获取手机号
+                let phone = $("#log_number2").val();
+                if(phone.length!=0 && isPhoneNumber(phone)){
+                    $.ajax({
+                        url: '${pageContext.request.contextPath}/fore/send/'+phone,
+                        type: 'GET',
+                        success: function (info) {
+                            if (!info.flag) {
+                                alert("验证码发送失败，请联系管理员！");
+                            }else {
+                                //发送成功
+                                let td = $("#askPhoneCheckCode").parent();
+                                td.html("已发送");
+                                setTimeout(function () {
+                                    td.html("<a href=\"#\" id=\"askPhoneCheckCode\">点我发送</a>");
+                                },60000);
+                            }
+                        }
+                    });
+                }});
+
+            //切换短信登录
+            $("#smsLogin").click(function () {
+                $("#login_form").css("display","none");
+                $("#login_sms").css("display","");
+
+                $(this).html("");
+            });
+
+            // 短信登录
+            $("#login_sms").submit(function () {
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/fore/userLoginBySms',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (info) {
+                        if (!info.flag) {
+                            alert(info.info);
+                            location.href = "register";
+                        } else {
+                            location.href = "home";
+                        }
+                    }
+                });
+            });
+
             //判断是否输入正确的手机号
             $("input[name=telNum]").blur(function () {
                 let telNum = $(this).val();
@@ -101,6 +149,7 @@
 <body>
 <%@include file="../include/fore/foreHeader.jsp" %>
 
+
 <div class="foreWoreArea">
 
     <div class="form_div">
@@ -137,7 +186,40 @@
                             <button type="submit" class="btn btn-default login_btn">登录</button>
                         </td>
                         <td>
-                            <a href="#">短信登录</a>
+
+                        </td>
+
+                        <td></td>
+                    </tr>
+                </table>
+            </form>
+            <%--短信登录--%>
+            <form action="#" method="post" id="login_sms" style="display: none">
+                <table>
+
+                    <tr>
+                        <td><span class="login_txt">手机号</span></td>
+                        <td colspan="2"><input type="text" class="form-control " placeholder="输入手机号"
+                                               id="log_number2" name="phone"
+                                               onkeyup="value=value.replace(/[^\d]/g,'')"
+                                               onblur="value=value.replace(/[^\d]/g,'')"
+                        ></td>
+                        <td><span id="error_info2"></span></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td><span class="login_txt">验证码</span></td>
+                        <td><input type="text" class="form-control " id="checkCode2" name="phoneCheckCode"></td>
+                        <td><a href="#" id="askPhoneCheckCode">点我发送</a></td>
+                        <td><span id="check_error2"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <button type="submit" class="btn btn-default login_btn">登录</button>
+                        </td>
+                        <td>
+
                         </td>
 
                         <td></td>
@@ -146,9 +228,15 @@
             </form>
 
             <div id="reg_div">
+                <a href="#" id="smsLogin">短信登录</a>&nbsp
                 <a href="${pageContext.request.contextPath}/fore/register">注册账号</a>
             </div>
         </div>
+    </div>
+
+    <%--短信登录--%>
+    <div style="display: none">
+
     </div>
 </div>
 

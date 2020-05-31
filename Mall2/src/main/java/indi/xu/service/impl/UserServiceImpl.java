@@ -3,6 +3,7 @@ package indi.xu.service.impl;
 import indi.xu.dao.UserDao;
 import indi.xu.domain.User;
 import indi.xu.service.UserService;
+import indi.xu.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUser(User user) {
+    public User findUser(String telNum,String password) {
+        User user = new User();
+        user.setPassword(MD5Util.MD5Encode(password, "UTF-8"));
+        user.setTelNum(telNum);
         return userDao.findUser(user);
     }
 

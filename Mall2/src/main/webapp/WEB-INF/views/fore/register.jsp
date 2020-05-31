@@ -21,6 +21,7 @@
 
 
     <script>
+
         $(function () {
             let img_check = $("#img_check");
             img_check.click(function () {
@@ -58,17 +59,30 @@
                 }
             });
 
-            //密码二次验证,与第一个框的密码验证
-            $("#reg_pass2").blur(function () {
-                let pass1 = $("#reg_pass");
-                if(pass1.val().trim().length == 0 || $(this).val().trim().length == 0){
-                    $("#passCheck").html("<font color = 'red'>密码不能为空</font>");
-                }else if (pass1.val() !== $(this).val()) {
-                    $("#passCheck").html("<font color = 'red'>密码不一致</font>");
-                    // alert("2次密码不一样！");
-                }else {
-                    $("#passCheck").html("<font color = 'green'>OK</font>");
+            // 发送验证码
+            $("#askPhoneCheckCode").click(function () {
+                // .1获取手机号
+                let phone = $("#reg_phone").val();
+                if(phone.length!=0 && isPhoneNumber(phone)){
+                    $.ajax({
+                        url: '${pageContext.request.contextPath}/fore/send/'+phone,
+                        type: 'GET',
+                        success: function (info) {
+                            if (!info.flag) {
+                                alert("验证码发送失败，请联系管理员！");
+                            }else {
+                                //发送成功
+                                let td = $("#askPhoneCheckCode").parent();
+                                td.html("已发送");
+                                setTimeout(function () {
+                                    td.html("<a href=\"#\" id=\"askPhoneCheckCode\">点我发送</a>");
+                                },60000);
+                            }
+                        }
+                    });
                 }
+
+
             });
 
             //提交表单
@@ -76,7 +90,6 @@
 
                 let phone = $("#reg_phone");
                 let password = $("#reg_pass");
-                let password2 = $("#reg_pass2");
                 let checkCode = $("#checkCode");
 
                 if (phone.val().length <= 0 || phone.val().trim().length == 0) {
@@ -93,35 +106,17 @@
                     return false;
                 }
 
-                if (password2.val().length <= 0) {
-                    password2.css("border", "2px solid red");
-                    return false;
-                }
-
                 if (checkCode.val().length <= 0) {
                     checkCode.css("border", "2px solid red");
                     return false;
                 }
 
-                if (password.val() != password2.val()) {
-                    alert("2次密码不一样！");
-                    return false;
-                }
-
                 //上面都满足才提交   ajax提交表单为json格式
-                var formObject = {};
-                var formArray =$(this).serializeArray();
-                $.each(formArray,function(i,item){
-                    formObject[item.name] = item.value;
-                });
 
                 $.ajax({
                     url: '${pageContext.request.contextPath}/fore/userRegister',
                     type: 'POST',
-                    contentType: 'application/json; charset=UTF-8',
-                    async: false,
-                    dataType: 'json',
-                    data: JSON.stringify(formObject),
+                    data: $(this).serialize(),
                     success: function (info) {
                         if (!info.flag) {
                             $("#check_error").html(info.info);
@@ -150,7 +145,7 @@
                 <table>
                     <tr>
                         <td><span class="login_txt">手机号</span></td>
-                        <td colspan="2"><input type="text" class="form-control " placeholder="输入手机号" name="telNum"
+                        <td colspan="2"><input type="text" class="form-control " placeholder="输入手机号" name="phone"
                                                id="reg_phone"
                                                onkeyup="value=value.replace(/[^\d]/g,'')"
                                                onblur="value=value.replace(/[^\d]/g,'')"></td>
@@ -166,19 +161,11 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td><span class="login_txt">确&nbsp&nbsp&nbsp&nbsp认</span></td>
-                        <td colspan="2"><input type="password" class="form-control" placeholder="再次输入密码"
-                                               name="password2" id="reg_pass2"></td>
-                        <td colspan="2"><span id="passCheck"></span></td>
-
-                        <td></td>
-                    </tr>
-                    <tr>
                         <td><span class="login_txt">验证码</span></td>
                         <td>
-                            <input type="text" class="form-control " name="checkCode" id="checkCode">
+                            <input type="text" class="form-control " name="phoneCheckCode" id="checkCode">
                         </td>
-                        <td><a><img src="${pageContext.request.contextPath}/fore/checkCode" id="img_check"> </a></td>
+                        <td><a href="#" id="askPhoneCheckCode">点我发送</a></td>
 
                         <td><span id="check_error"></span></td>
                     </tr>

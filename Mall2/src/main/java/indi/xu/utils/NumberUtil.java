@@ -1,5 +1,8 @@
 package indi.xu.utils;
 
+import indi.xu.common.MallConstant;
+
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,5 +55,33 @@ public class NumberUtil {
         int num = genRandomNum(4);
         buffer.append(num);
         return buffer.toString();
+    }
+
+    /**
+     * 生成指定位数手机验证码
+     */
+    public static String createPhoneCheckCode(int num){
+        StringBuilder sb = new StringBuilder();
+        Random rd = new Random();
+        for (int i = 0; i < num; i++) {
+            sb.append(rd.nextInt(10));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 产生4位随机字符串
+     */
+    public static String createCheckCode() {
+        String base = "123456789ABCDEFGHJKLUVWXYZabcdefghijk";
+        int size = base.length();
+        Random r = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= MallConstant.CHECK_CODE_NUM; i++) {
+            int index = r.nextInt(size);
+            char c = base.charAt(index);
+            sb.append(c);
+        }
+        return sb.toString();
     }
 }

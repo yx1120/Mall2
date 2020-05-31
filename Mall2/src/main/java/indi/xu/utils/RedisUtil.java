@@ -113,7 +113,7 @@ public class RedisUtil {
     }
 
     /**
-     * 普通缓存放入并设置时间
+     * 普通缓存放入并设置过期时间
      *
      * @param key   键
      * @param value 值

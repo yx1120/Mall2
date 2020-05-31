@@ -1,9 +1,11 @@
 package indi.xu.web.controller.mall;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import indi.xu.log.anno.SystemControllerLog;
 import indi.xu.common.MallConstant;
 import indi.xu.common.MallResultTip;
 import indi.xu.domain.AdminUser;
+import indi.xu.utils.RedisUtil;
 import indi.xu.utils.ResultInfo;
 import indi.xu.domain.User;
 import indi.xu.service.*;
@@ -18,14 +20,14 @@ import org.springframework.web.util.HtmlUtils;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Date;
-import java.util.Map;
-import java.util.Random;
+import java.sql.ResultSet;
+import java.util.*;
 
 /**
  * 前台用户相关操作
@@ -42,6 +44,10 @@ public class MallUserController {
     private UserService userService;
     @Resource
     private AdminUserService adminUserService;
+    @Resource
+    private SmsService smsService;
+    @Resource
+    private RedisUtil redisUtil;
 
     @SystemControllerLog(description = "注册成功", actionType = "info")
     @RequestMapping("/registerSuccess")
@@ -73,7 +79,7 @@ public class MallUserController {
         g.fillRect(0, 0, width, height);
 
         //产生4个随机验证码，12Ey
-        String codeServer = getCheckCode();
+        String codeServer = NumberUtil.createCheckCode();
         //将验证码放入HttpSession中
         session.setAttribute("codeServer", codeServer);
 
@@ -102,62 +108,69 @@ public class MallUserController {
         ImageIO.write(image, "PNG", response.getOutputStream());
     }
 
-    /**
-     * 产生4位随机字符串
-     */
-    private String getCheckCode() {
-        String base = "123456789ABCDEFGHJKLUVWXYZabcdefghijk";
-        int size = base.length();
-        Random r = new Random();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 1; i <= 4; i++) {
-            int index = r.nextInt(size);
-            char c = base.charAt(index);
-            sb.append(c);
+    @RequestMapping("/userLoginBySms")
+    @ResponseBody
+    public ResultInfo userLoginBySms(@RequestParam("phone")String phone, @RequestParam("phoneCheckCode") String phoneCheckCode, Model model){
+        ResultInfo info = new ResultInfo(false);
+        //
+        if(StringUtils.isBlank(phone) || !NumberUtil.isPhone(phone) || StringUtils.isBlank(phoneCheckCode)) {
+            return info;
         }
-        return sb.toString();
+
+        // 手机号未注册
+        User user = userService.findRepeatTelNumber(phone);
+        if( user == null){
+            info.setInfo("该手机未注册，请先注册！");
+            return info;
+        }
+
+        String codeServer = (String) redisUtil.get(phone);
+        redisUtil.del(phone);
+        if(codeServer != null && codeServer.equals(phoneCheckCode)){
+            model.addAttribute("user",user);
+            info.setFlag(true);
+            return info;
+        }
+        return info;
     }
 
     /**
      * 用户登录
-     * 需要注意的地方：如何发送表单json数据，如何接受josn数据？使用@RequestBody注解，使用map接受。
-     * 因为这里还提交了验证码，使用@Param或@RequestParam注解获取不到
-     * 先把放到map，然后取出来后，封装对象
+     *      注意：如何发送表单json数据，如何接受josn数据？使用@RequestBody注解，使用map接受。
+     *      因为这里还提交了验证码，使用@Param或@RequestParam注解获取不到
+     *      先把放到map，然后取出来后，封装对象
      */
     @RequestMapping("/userLogin")
     @ResponseBody
     public ResultInfo userLogin(@RequestBody Map<String, Object> map,
                                 @SessionAttribute String codeServer,
                                 Model model, HttpSession session) {
-        ResultInfo info = null;
+        ResultInfo info = new ResultInfo(false);
 
         String password = (String) map.get("password");
         String telNum = (String) map.get("telNum");
         String checkCode = (String) map.get("checkCode");
 
         if (StringUtils.isBlank(password) || StringUtils.isBlank(telNum) || StringUtils.isBlank(checkCode)) {
-            info = new ResultInfo(false,MallResultTip.LOGIN_INFO_ERROR.getTipInfo());
+            info.setInfo(MallResultTip.LOGIN_INFO_ERROR.getTipInfo());
+            return info;
+        }
+
+        //验证码错误
+        if (!checkCode.equalsIgnoreCase(codeServer)) {
+            info.setInfo(MallResultTip.CHECK_CODE_ERROR.getTipInfo());
             return info;
         }
 
         //删除验证码
         session.removeAttribute("codeServer");
-        User user = new User();
-        user.setPassword(MD5Util.MD5Encode(password, "UTF-8"));
-        user.setTelNum(telNum);
 
-        //验证码错误
-        if (!checkCode.equalsIgnoreCase(codeServer)) {
-            info = new ResultInfo(false, MallResultTip.CHECK_CODE_ERROR.getTipInfo());
-            return info;
-        }
-
-        //验证码正确
-        if ((user = userService.findUser(user)) == null) {
-            info = new ResultInfo(false, MallResultTip.LOGIN_USER_INFO_ERROR.getTipInfo());
+        User user;
+        if ((user = userService.findUser(telNum,password)) == null) {
+            info.setInfo(MallResultTip.LOGIN_USER_INFO_ERROR.getTipInfo());
         } else {
             //登录成功
-            info = new ResultInfo(true);
+            info.setFlag(true);
             model.addAttribute("user", user);
         }
         return info;
@@ -172,10 +185,13 @@ public class MallUserController {
         return "redirect:home";
     }
 
+    /**
+     * 注册时检验重复名
+     */
     @RequestMapping("/checkRepeatName")
     @ResponseBody
     public ResultInfo checkRepeatName(String telNum) {
-        ResultInfo info = null;
+        ResultInfo info;
         if (StringUtils.isNotBlank(telNum) && userService.findRepeatTelNumber(telNum) == null) {
             info = new ResultInfo(false, MallResultTip.REGISTER_OK.getTipInfo());
             return info;
@@ -185,47 +201,93 @@ public class MallUserController {
         return info;
     }
 
-    @RequestMapping("/userRegister")
+    /**
+     * 发送验证码
+     *      流程：获取手机号--->生成验证码--->存到redis，key:phone  ,value:code
+     *            --->调用sendSms接口
+     *            --->发送验证码
+     */
+    @RequestMapping("/send/{phone}")
     @ResponseBody
-    public ResultInfo userRegister(@RequestBody Map<String, Object> map,
-                                   @SessionAttribute String codeServer,
-                                   HttpSession session) {
-        ResultInfo info = null;
+    public ResultInfo sendSms(@PathVariable String phone) throws JsonProcessingException {
 
-        String phone = (String) map.get("telNum");
-        String password = (String) map.get("password");
-        String checkCode = (String) map.get("checkCode");
-
-        if (StringUtils.isBlank(phone) || !NumberUtil.isPhone(phone) ||
-                StringUtils.isBlank(password) || StringUtils.isBlank(checkCode)) {
-            //验证码错误
-            info = new ResultInfo(false, MallResultTip.PHONE_FORMAT_ERROR.getTipInfo());
-            return info;
+        if(StringUtils.isBlank(phone) || !NumberUtil.isPhone(phone)) {
+            return new ResultInfo(false,"手机号无效！");
         }
 
-        session.removeAttribute("codeServer");
-
-        if (StringUtils.isNotBlank(checkCode) && codeServer.equalsIgnoreCase(checkCode)) {
-            //check_success
-            phone = HtmlUtils.htmlEscape(phone);
-            User regUser = new User();
-            regUser.setTelNum(phone);
-
-            password = MD5Util.MD5Encode(password, "UTF-8");
-            regUser.setPassword(password);
-            regUser.setCreateTime(new Date());
-            //用户刚注册，默认昵称为手机号
-            regUser.setUname(phone);
-
-            userService.add(regUser);
-            info = new ResultInfo(true);
-        } else {
-            //验证码错误
-            info = new ResultInfo(false, MallResultTip.CHECK_CODE_ERROR.getTipInfo());
+        // redis是否存在未过期phone
+        if(redisUtil.get(phone)!=null){
+            return new ResultInfo(false,"请勿重复操作！");
         }
-        return info;
+
+        // 生成n位验证码
+        String phoneCode = NumberUtil.createPhoneCheckCode(MallConstant.PHONE_CHECK_CODE_NUM);
+        HashMap<String,String> param = new HashMap<>();
+        param.put("code", phoneCode);
+        // 调用sms --->成功-redis   失败-无
+
+        boolean isSendOk = smsService.send(phone.trim(), "SMS_190282724", param);
+        if(isSendOk){
+            // 存到redis,一分钟后过期
+            redisUtil.set(phone,phoneCode,60);
+        }
+
+        return new ResultInfo(isSendOk);
     }
 
+
+
+    /**
+     * 用户注册:
+     *      流程：--->用户输入手机号-->发送短信验证码/sendSms
+     *
+     *           --->输入验证码，手机号
+     *           --->校验(从redis中取验证码和用户输入的验证码校验
+     *           --->判断是否注册成功
+     *              -->成功：跳转页面
+     *              -->失败：提示信息
+     */
+    @RequestMapping("/userRegister")
+    @ResponseBody
+    public ResultInfo userRegister(@RequestParam("phone") String phone,@RequestParam("password") String password,@RequestParam("phoneCheckCode") String phoneCheckCode) {
+
+        if (StringUtils.isBlank(phone) || !NumberUtil.isPhone(phone) ||
+                StringUtils.isBlank(password) || StringUtils.isBlank(phoneCheckCode)) {
+            //验证码错误
+            return new ResultInfo(false, MallResultTip.LOGIN_INFO_ERROR.getTipInfo());
+        }
+
+        if( userService.findRepeatTelNumber(phone)!=null){
+            return new ResultInfo(false);
+        }
+
+        // 从redis中取出验证码
+        String codeServer = (String)redisUtil.get(phone);
+        redisUtil.del(phone);
+
+        if(codeServer == null || !codeServer.equals(phoneCheckCode)){
+            return new ResultInfo(false, MallResultTip.CHECK_CODE_ERROR.getTipInfo());
+        }
+
+        //check_success
+        phone = HtmlUtils.htmlEscape(phone);
+        User regUser = new User();
+        regUser.setTelNum(phone);
+
+        password = MD5Util.MD5Encode(password, "UTF-8");
+        regUser.setPassword(password);
+        regUser.setCreateTime(new Date());
+        //用户刚注册，默认昵称为手机号
+        regUser.setUname(phone);
+
+        userService.add(regUser);
+        return new ResultInfo(true);
+
+    }
+
+    /**
+     * 管理员登录
+     */
     @RequestMapping("/toAdminLogin")
     public String toAdminLogin(AdminUser adminUser, Model model, HttpSession session) {
 
@@ -241,6 +303,9 @@ public class MallUserController {
 
     }
 
+    /**
+     * 管理员注销
+     */
     @RequestMapping("/toAdminLogout")
     public String toAdminLogout(HttpSession session) {
         session.removeAttribute("adUser");

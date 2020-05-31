@@ -80,16 +80,24 @@ button.login_btn2 {
 
 #reg_div{
     float: right;
-    /*border: 1px solid rebeccapurple;*/
 }
-#reg_div a{
+#reg_div a:last-child{
     color: deeppink;
     font-family: "微软雅黑";
 }
 
-#reg_div a:hover{
+#reg_div a:last-child:hover{
     text-decoration:none;
     color: red;
-    font-weight: bold;
+}
+
+#reg_div a:first-child{
+    color: deepskyblue;
+    font-family: "微软雅黑";
+}
+
+#reg_div a:first-child:hover{
+    text-decoration:none;
+    color: dodgerblue;
 }
 

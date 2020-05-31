@@ -26,6 +26,6 @@ public interface UserService {
      */
     User findRepeatTelNumber(String telNum);
 
-    User findUser(User user);
+    User findUser(String telNum,String password);
 
 }

@@ -54,7 +54,6 @@
             <a href="../myOrders/all" class="list-group-item">我的订单</a>
             <a href="../myFavorites" class="list-group-item">我的收藏</a>
             <a href="myReviews/all" class="list-group-item active">我的评价</a>
-            <a href="../myMoods" class="list-group-item">我的动态</a>
             <a href="../toFixPassword" class="list-group-item">修改密码</a>
 
         </div>

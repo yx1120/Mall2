@@ -11,11 +11,11 @@ public enum MallResultTip {
     /**
      * 错误提示信息
      */
-    LOGIN_INFO_ERROR("登录信息错误"),
+    LOGIN_INFO_ERROR("<font color='red'>登录信息错误</font>"),
 
     LOGIN_USER_INFO_ERROR("<font color='red'>用户名或密码错误</font>"),
 
-    CHECK_CODE_ERROR("<font color='red'>验证码错误</font>"),
+    CHECK_CODE_ERROR("<font color='red'>验证码错误或已过期</font>"),
 
     REGISTER_OK("<font color='green'>可以注册</font>"),
 
