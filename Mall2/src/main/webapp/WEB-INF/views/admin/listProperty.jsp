@@ -20,6 +20,26 @@
             <li class="active">${category.cname}</li>
             <li class="active">属性</li>
         </ol>
+
+        <ol class="breadcrumb">
+            <div >
+                <form method="post" id="addPropertyForm" action="add">
+                    <table class="addTable">
+                        <tr>
+                            <td class="cate_text">属性名称</td>
+                            <td ><input id="name" name="pyname" type="text" class="form-control" placeholder="输入属性名称"></td>
+
+                            <td >
+                                <input hidden name="cid" value="${category.cid} ">
+                                <button type="submit" class="btn btn-danger">新 增</button>
+                            </td>
+                        </tr>
+
+                    </table>
+                </form>
+            </div>
+            <div style="clear: both"></div>
+        </ol>
     </div>
 
     <div class="product_table ">
@@ -56,28 +76,6 @@
         <%@include file="../include/admin/adminPage.jsp" %>
     </div>
 
-    <!--   新增商品-->
-    <div class="panel panel-warning property_addDiv">
-        <div class="panel-heading">新增属性</div>
-        <div class="panel-body">
-
-            <form method="post" id="addForm" action="add">
-                <table class="addTable">
-                    <tr>
-                        <td class="cate_text">属性名称</td>
-                        <td><input name="pyname" type="text" class="form-control"></td>
-                    </tr>
-                    <tr class="submitTR">
-                        <td colspan="2" align="center">
-                            <%--    加一个隐藏域提交cid--%>
-                            <input name="cid" type="hidden" value="${category.cid}" class="form-control">
-                            <button type="submit" class="btn btn-success">提 交</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-    </div>
 </div>
 
 <%@include file="../include/admin/adminFooter.jsp" %>

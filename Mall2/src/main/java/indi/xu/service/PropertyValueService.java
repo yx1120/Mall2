@@ -20,18 +20,8 @@ public interface PropertyValueService {
 
     List<PropertyValue> list(int pid);
 
+    void init(Product p);
+
     PropertyValue findByPidAndPyid(int pid, int pyid);
 
-    /**
-     * 初始化某个产品对应的属性值，初始化逻辑：
-     * 1. 根据分类获取所有的属性
-     * 2. 遍历每一个属性
-     * 2.1 根据属性和产品，获取属性值
-     * 2.2 如果属性值不存在，就创建一个属性值对象
-     * <p>
-     * 放到service
-     *
-     * @param p
-     */
-    void init(Product p);
 }

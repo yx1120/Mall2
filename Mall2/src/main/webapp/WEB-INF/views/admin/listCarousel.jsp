@@ -84,7 +84,7 @@
                 setTimeout(function () {
                     $(btn).removeClass("btn-success");
                     $(btn).html("更新");
-                },2000);
+                },1000);
             }
         });
     }

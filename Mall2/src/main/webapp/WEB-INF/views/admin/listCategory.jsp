@@ -97,10 +97,10 @@
             <tr class=" row">
                 <th class="col-lg-3">分类名称</th>
 
-                <th class="col-lg-2">属性</th>
-                <th class="col-lg-2">产品</th>
+                <th class="col-lg-3">属性</th>
+                <%--<th class="col-lg-2">产品</th>--%>
                 <th class="col-lg-3">编辑</th>
-                <th class="col-lg-2">删除</th>
+                <th class="col-lg-3">删除</th>
             </tr>
             </thead>
 
@@ -119,11 +119,11 @@
                         </a>
                     </td>
                         <%--产品管理--%>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/admin/product/list?cid=${c.cid}">
-                            <span class="glyphicon glyphicon-shopping-cart"></span>
-                        </a>
-                    </td>
+                    <%--<td>--%>
+                    <%--    <a href="${pageContext.request.contextPath}/admin/product/list?cid=${c.cid}">--%>
+                    <%--        <span class="glyphicon glyphicon-shopping-cart"></span>--%>
+                    <%--    </a>--%>
+                    <%--</td>--%>
 
                     <td>
                         <%--“编辑”图标--%>

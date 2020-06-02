@@ -124,6 +124,7 @@ public class MallProductController {
             return "error/404";
         }
 
+        //------------------------------------------>
         //如果用户已经登录，判断是否收藏了该商品
         User user = (User) session.getAttribute("user");
         boolean isFavorite = false;
@@ -134,6 +135,7 @@ public class MallProductController {
                 isFavorite = true;
             }
         }
+        //------------------------------------------->
 
         List<PropertyValue> pvList = propertyValueService.list(pid);
         List<Review> reviewList = reviewService.findByPid(pid);

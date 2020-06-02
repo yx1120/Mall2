@@ -15,13 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -42,7 +37,7 @@ public class CategoryController {
     /**
      * 刷新二级分类缓存
      */
-    private void updateCache(int parentId) {
+    private void updateLevel2Cache(int parentId) {
         System.out.println("刷新二级分类缓存..." + parentId);
         String key = "categories" + parentId;
         redisUtil.del(key);
@@ -91,7 +86,7 @@ public class CategoryController {
         //先要删除分类的所有属性,产品
         categoryService.delete(cid);
         //刷新缓存
-        updateCache(parentId);
+        updateLevel2Cache(parentId);
         return "redirect:list?parentId=" + parentId;
     }
 
@@ -113,12 +108,14 @@ public class CategoryController {
         bean.setCategoryLevel(MallConstant.CATEGORY_LEVEL_TWO);
 
         categoryService.add(bean);
-        updateCache(bean.getParentCategory().getCid());
+        updateLevel2Cache(bean.getParentCategory().getCid());
 
         return "redirect:list?parentId="+parentId;
     }
 
-    //更新二级分类
+    /**
+     * 更新二级分类
+     */
     @RequestMapping("category/update")
     @ResponseBody
     public ResultInfo update(@RequestParam("cid") Integer cid,@RequestParam("cname") String cname) {
@@ -131,7 +128,7 @@ public class CategoryController {
 
         category.setCname(cname);
         categoryService.update(category);
-        updateCache(category.getParentCategory().getCid());
+        updateLevel2Cache(category.getParentCategory().getCid());
         info.setFlag(true);
         return info;
     }

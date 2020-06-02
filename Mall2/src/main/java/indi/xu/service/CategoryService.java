@@ -14,6 +14,8 @@ public interface CategoryService {
 
     void delete(int cid);
 
+    void deleteByParentId(int parentId);
+
     void update(Category bean);
 
     Category get(int cid);

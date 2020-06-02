@@ -11,6 +11,9 @@ public class PageVo {
     private Integer currentPage;
 
     public PageVo(Integer row, Integer currentPage) {
+
+        // 初始化的时候进行参数有效校验
+
         this.row = row;
         this.currentPage = currentPage;
     }

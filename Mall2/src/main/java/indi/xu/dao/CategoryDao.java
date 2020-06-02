@@ -30,8 +30,11 @@ public interface CategoryDao {
      * deleteCategory
      *
      */
-    @Delete("update category set is_deleted = 1 where cid = #{cid}")
+    @Update("update category set is_deleted = 1 where cid = #{cid}")
     void delete(int cid);
+
+    @Update("update category set is_deleted =1  where parent_id = #{parentId}")
+    void deleteByParentId(int parentId);
 
     /**
      * 更新1/2级分类信息：这里只更新名称

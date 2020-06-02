@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 后台：商品管理控制器
+ * 后台：商品管理
  *
  * @author a_apple
  * @create 2020-02-28 20:03
@@ -70,19 +70,7 @@ public class ProductController {
         }
 
         Integer cid = productService.get(pid).getCategory().getCid();
-
-        // 事务，因为有外键关联，所以删除一个商品先删除商品的所有图片
-        // 还有商品的属性值
-        List<ProductImage> singleList = productImageService.list(pid, ProductImageService.TYPE_SINGLE);
-        List<ProductImage> detailsList = productImageService.list(pid, ProductImageService.TYPE_DETAIL);
-        for (ProductImage image : detailsList) {
-            productImageService.delete(image.getGid());
-        }
-        for (ProductImage image2 : singleList) {
-            productImageService.delete(image2.getGid());
-        }
-
-        productService.delete(pid);
+        productService.deleteByPid(pid);
         return "redirect:list?cid=" + cid;
     }
 

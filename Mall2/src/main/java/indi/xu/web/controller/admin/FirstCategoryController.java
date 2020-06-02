@@ -13,7 +13,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -35,7 +34,7 @@ public class FirstCategoryController {
     /**
      * 刷新一级分类缓存
      */
-    private void updateCache() {
+    private void updateLevel1Cache() {
         System.out.println("刷新一级分类缓存...");
         //1.更新缓存
         String key = "firstCategories";
@@ -70,9 +69,11 @@ public class FirstCategoryController {
         if (cid < 0 || categoryService.get(cid) == null) {
             return "error/500";
         }
-        //要先删除这个分类下面的所有二级。。
+        //删除这个分类下面的所有二级。。
+        categoryService.deleteByParentId(cid);
         categoryService.delete(cid);
-        updateCache();
+
+        updateLevel1Cache();
         return "redirect:list";
     }
 
@@ -91,7 +92,7 @@ public class FirstCategoryController {
         firstCategory.setParentCategory(parent);
 
         categoryService.add(firstCategory);
-        updateCache();
+        updateLevel1Cache();
 
         return "redirect:list";
     }
@@ -109,7 +110,7 @@ public class FirstCategoryController {
         }
 
         categoryService.update(category);
-        updateCache();
+        updateLevel1Cache();
         info.setFlag(true);
         return info;
     }

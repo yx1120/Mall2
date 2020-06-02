@@ -2,6 +2,7 @@ package indi.xu.web.controller.admin;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import indi.xu.common.MallConstant;
 import indi.xu.domain.AdminUser;
 import indi.xu.domain.Carousel;
 import indi.xu.service.CarouselService;
@@ -68,10 +69,10 @@ public class CarouselController {
         if (carousel.getIsPush() == 1) {
             //取消推送
             carousel.setIsPush((byte) 0);
-            info.setInfo("0");
+            info.setInfo(""+ MallConstant.NOT_PUSH_CAROUSEL);
         } else {
             carousel.setIsPush((byte) 1);
-            info.setInfo("1");
+            info.setInfo(""+MallConstant.PUSH_CAROUSEL);
         }
 
         carouselService.update(carousel);
@@ -85,7 +86,6 @@ public class CarouselController {
     @RequestMapping("carousel/add")
     public String add(HttpServletRequest request, MultipartFile uploadImg, @SessionAttribute AdminUser adUser) throws Exception {
 
-        System.out.println("上传轮播图...");
         //注意：页面提交文件的name属性值要和MultipartFile的变量名一样
 
         //获取上传位置
@@ -132,10 +132,9 @@ public class CarouselController {
     @RequestMapping("carousel/update")
     @ResponseBody
     public ResultInfo updateUrl(Integer carouselId, String carouselUrl) {
-        ResultInfo info = new ResultInfo();
-        Carousel carousel = null;
+        ResultInfo info = new ResultInfo(false);
+        Carousel carousel;
         if (carouselId == null || StringUtils.isBlank(carouselUrl) || (carousel = carouselService.get(carouselId)) == null) {
-            info.setFlag(false);
             return info;
         }
 

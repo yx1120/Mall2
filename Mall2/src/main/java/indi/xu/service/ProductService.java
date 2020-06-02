@@ -15,7 +15,7 @@ public interface ProductService {
 
     void add(Product bean);
 
-    void delete(int pid);
+    void deleteByPid(int pid);
 
     void update(Product bean);
 

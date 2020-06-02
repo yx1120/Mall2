@@ -61,13 +61,15 @@ public class SystemLogAspect {
      * [最终通知]
      * 用于拦截Controller层记录用户的操作
      * JoinPoint:接口
-     * ---MethodInvocationProceedingJoinPoint  实现了
+     *      ---MethodInvocationProceedingJoinPoint  实现了
+     *
      * 方法: getTarget()：获取被连接的点所在的控制器xxxController对象。（通过切入点表达式
      *       getSingnature():获取连接点（方法）的完整签名    .getName():获取方法名
      *       getArgs():返回连接点（方法）的参数
      */
     private void after(JoinPoint joinPoint) {
 
+        // 获取绑定到当前线程的HttpServletRequest对象
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         //读取session中的用户

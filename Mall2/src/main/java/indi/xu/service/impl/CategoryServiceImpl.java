@@ -62,6 +62,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public void deleteByParentId(int parentId) {
+        categoryDao.deleteByParentId(parentId);
+    }
+
+    @Override
     public void update(Category bean) {
         categoryDao.update(bean);
     }

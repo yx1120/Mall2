@@ -101,7 +101,6 @@
                 }
 
                 if (!isPhoneNumber(telNumber.val())) {
-                    // alert("手机号有问题"+telNumber);
                     return false;
                 }
 
@@ -243,6 +242,5 @@
 <%--------------------------------页尾---------------------------------%>
 <%@include file="../include/fore/foreFooter.jsp" %>
 <%--------------------------------页尾---------------------------------%>
-<%--<jsp:include page="../include/fore/foreFooter.jsp"/>--%>
 </body>
 </html>

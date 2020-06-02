@@ -1,18 +1,15 @@
 package indi.xu.service.impl;
 
-import indi.xu.dao.OrderItemDao;
-import indi.xu.dao.ProductDao;
-import indi.xu.dao.ProductImageDao;
-import indi.xu.dao.ReviewDao;
+import indi.xu.dao.*;
 import indi.xu.domain.Category;
 import indi.xu.domain.Product;
 import indi.xu.domain.ProductImage;
 import indi.xu.service.ProductImageService;
 import indi.xu.service.ProductService;
+import indi.xu.service.PropertyValueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -30,16 +27,38 @@ public class ProductServiceImpl implements ProductService {
     private OrderItemDao orderItemDao;
     @Autowired
     private ReviewDao reviewDao;
-    @Resource
+    @Autowired
     private ProductImageService productImageService;
+    @Autowired
+    private PropertyValueDao propertyValueDao;
+    @Autowired
+    private PropertyValueService propertyValueService;
+
 
     @Override
     public void add(Product bean) {
+        System.out.println(bean+": before....");
         productDao.add(bean);
+        System.out.println(bean+": after....");
+        propertyValueService.init(bean);
     }
 
     @Override
-    public void delete(int pid) {
+    public void deleteByPid(int pid) {
+        // 级联，因为有外键关联，所以删除一个商品先删除商品的所有图片
+        // 还有商品的属性值
+        List<ProductImage> singleList = productImageService.list(pid, ProductImageService.TYPE_SINGLE);
+        List<ProductImage> detailsList = productImageService.list(pid, ProductImageService.TYPE_DETAIL);
+        for (ProductImage image : detailsList) {
+            productImageService.delete(image.getGid());
+        }
+        for (ProductImage image2 : singleList) {
+            productImageService.delete(image2.getGid());
+        }
+
+        // 删除属性值
+        propertyValueDao.deleteByPid(pid);
+
         productDao.delete(pid);
     }
 

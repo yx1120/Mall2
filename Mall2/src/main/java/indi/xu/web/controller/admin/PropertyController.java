@@ -102,6 +102,10 @@ public class PropertyController {
         return "redirect:list?cid=" + cid;
     }
 
+    /**
+     * 删除某一分类的属性
+     *
+     */
     @RequestMapping("property/update")
     public String update(String pyname, Integer pyid) {
 

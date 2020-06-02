@@ -63,12 +63,18 @@ public interface PropertyValueDao {
      */
     @Select("select * from propertyvalue where pid = #{pid} and pyid = #{pyid}")
     @ResultMap("pvMap")
-    PropertyValue findByPidAndPyid(int pid, int pyid);
+    PropertyValue findByPidAndPyid(@Param("pid")int pid, @Param("pyid")int pyid);
 
     /**
      * 删除一个商品所有属性值
      */
     @Delete("delete from propertyvalue where pid = #{pid}")
-    void delete(int pid);
+    void deleteByPid(int pid);
 
+
+    /**
+     * 删除一个属性，删除这个属性在属性值表的所有记录【这样所有拥有该属性的商品就不会有了
+     */
+    @Delete("delete from propertyvalue where pyid = #{pyid}")
+    void deleteByPyid(int pyid);
 }

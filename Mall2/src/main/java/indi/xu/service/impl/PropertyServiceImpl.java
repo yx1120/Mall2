@@ -1,8 +1,10 @@
 package indi.xu.service.impl;
 
 import indi.xu.dao.PropertyDao;
+import indi.xu.dao.PropertyValueDao;
 import indi.xu.domain.Property;
 import indi.xu.service.PropertyService;
+import indi.xu.service.PropertyValueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Autowired
     private PropertyDao propertyDao;
+    @Autowired
+    private PropertyValueDao propertyValueDao;
 
     @Override
     public void add(Property bean) {
@@ -25,6 +29,8 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public void delete(int pyid) {
+        // 删除属性在属性值表的所有记录
+        propertyValueDao.deleteByPyid(pyid);
         propertyDao.delete(pyid);
     }
 

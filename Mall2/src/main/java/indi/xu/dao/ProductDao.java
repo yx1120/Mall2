@@ -1,7 +1,6 @@
 package indi.xu.dao;
 
 
-import indi.xu.domain.Category;
 import indi.xu.domain.Product;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
@@ -17,7 +16,8 @@ import java.util.List;
 @Repository
 public interface ProductDao {
 
-    @Insert("insert into product values(null, #{pname} , #{subTitle} , #{orignalPrice}, #{promotePrice}, #{stock} , #{category.cid} , #{createDate})")
+    @Insert("insert into product(pname,subTitle,orignalPrice,promotePrice,stock,cid,createDate)" +
+            " values(#{pname} , #{subTitle} , #{orignalPrice}, #{promotePrice}, #{stock} , #{category.cid} , #{createDate})")
     @Options(useGeneratedKeys = true, keyProperty = "pid")
     void add(Product bean);
 
