@@ -51,7 +51,7 @@
     </div>
 
 
-    <div class="panel panel-warning pro_editDiv">
+    <div class="panel panel-info pro_editDiv">
         <%--BootStrap 带标题的面板--%>
         <div class="panel-heading">编辑属性</div>
         <%--	BootStrap-面板体。--%>

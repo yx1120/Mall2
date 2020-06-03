@@ -11,6 +11,32 @@
 <%@include file="../include/admin/adminNavigator.jsp" %>
 <link href="${pageContext.request.contextPath}/css/back/admin_list.css" rel="stylesheet">
 
+<script>
+    function toEdit(a) {
+        var pyid = $(a).attr("pyid");
+        $(a).html('');
+        $(a).parent().append(($("div[pyid2="+pyid+"]").html()));
+    }
+
+    function updateName(btn) {
+        var pyid = $(btn).attr("pyid");
+        var tr = $(btn).parent().parent();
+        //获取子节点table
+        var pyname = tr.find("input").attr("pyid2", pyid).val();
+
+        // alert(pyid+"..."+pyname+"...");
+
+        $.post("${pageContext.request.contextPath}/admin/property/update",{pyid:pyid,pyname:pyname},function (info) {
+            if(info.flag){
+                $(btn).addClass("btn-success");
+                $(btn).html("O K");
+
+                location.reload();
+            }
+        });
+    }
+</script>
+
 
 <title>属性管理</title>
 <div class="workArea">
@@ -45,11 +71,11 @@
     <div class="product_table ">
         <table class="table table-striped  table-hover">
             <thead>
-            <tr class="success">
+            <tr class="info">
                 <%--<th>ID</th>--%>
-                <th>属性名称</th>
-                <th>编辑</th>
-                <th>删除</th>
+                <th class="col-lg-4">属性名称</th>
+                <th class="col-lg-4">编辑</th>
+                <th class="col-lg-4">删除</th>
             </tr>
             </thead>
 
@@ -58,8 +84,25 @@
                 <tr>
                         <%--<td>${vs.count}</td>--%>
                     <td>${p.pyname}</td>
+
+                    <%-- 编辑属性--%>
                     <td>
-                        <a href="edit?pyid=${p.pyid}"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="#" onclick="toEdit(this)" pyid="${p.pyid}"><span class="glyphicon glyphicon-edit"></span></a>
+
+                        <div hidden class="edit_div" pyid2=${p.pyid}>
+                            <table >
+                                <tr>
+                                    <td>
+                                        <label>
+                                            <input type="text" placeholder="${p.pyname}" class="form-control" pyid2=${p.pyid}>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <button class="btn" onclick="updateName(this)" pyid=${p.pyid}>更新</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </td>
                     <td>
                         <a deleteLink="true" href="delete?pyid=${p.pyid}"><span

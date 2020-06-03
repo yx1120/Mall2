@@ -7,12 +7,14 @@ import indi.xu.domain.Property;
 import indi.xu.service.CategoryService;
 import indi.xu.service.PropertyService;
 import indi.xu.utils.PageUtil;
+import indi.xu.utils.ResultInfo;
 import indi.xu.web.vo.PageVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -60,19 +62,6 @@ public class PropertyController {
         return "admin/listProperty";
     }
 
-    @RequestMapping("property/edit")
-    public String edit(Integer pyid, Model model) {
-
-        if (pyid < 0 || propertyService.get(pyid) == null) {
-            return "error/500";
-        }
-
-        Property property = propertyService.get(pyid);
-        model.addAttribute("bean", property);
-
-        return "admin/editProperty";
-    }
-
     @RequestMapping("property/delete")
     public String delete(Integer pyid) {
 
@@ -107,15 +96,19 @@ public class PropertyController {
      *
      */
     @RequestMapping("property/update")
-    public String update(String pyname, Integer pyid) {
+    @ResponseBody
+    public ResultInfo update(String pyname, Integer pyid) {
+
+        ResultInfo info = new ResultInfo(false);
 
         if (pyid < 0 || propertyService.get(pyid) == null || StringUtils.isBlank(pyname)) {
-            return "error/500";
+            return info;
         }
         Property property = propertyService.get(pyid);
         property.setPyname(pyname);
         propertyService.update(property);
+        info.setFlag(true);
 
-        return "redirect:list?cid=" + property.getCategory().getCid();
+        return info;
     }
 }

@@ -14,7 +14,7 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--1.开启Spring注解扫描
-        只希望处理service和dao，即@Service     @Repository
+        只处理service和dao，即@Service     @Repository
 		@Contoller注解由springMVC框架管理
     -->
     <context:component-scan base-package="indi.xu">
@@ -22,7 +22,7 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <!--整合Mybatis,去掉Mybatis主配置文件。将内容都放到这里-->
+    <!--整合Mybatis,去掉Mybatis主配置文件。-->
     <!--1.配置数据库配置文件-->
     <context:property-placeholder location="classpath:jdbc-config.properties" ignore-unresolvable="true"/>
     <!--2.配置连接池-->
@@ -75,9 +75,6 @@
     <aop:config>
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* indi.xu.service.impl.*ServiceImpl.*(..))"/>
     </aop:config>
-
-    <!-- 配置spring开启注解AOP的支持-->
-    <!--<aop:aspectj-autoproxy/>-->
 
     <!--导入redis配置文件-->
     <import resource="spring-redis.xml"/>

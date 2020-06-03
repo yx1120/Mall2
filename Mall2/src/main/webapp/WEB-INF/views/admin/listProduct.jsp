@@ -28,18 +28,19 @@
     <div class="product_table ">
         <table class="table table-striped table-hover">
             <thead>
-            <tr class="success">
+            <tr class="info">
                 <%--<th>ID</th>--%>
-                <th>图片</th>
-                <th>产品名称</th>
-                <th>产品小标题</th>
-                <th>原价格</th>
-                <th>优惠价格</th>
-                <th>库存数量</th>
-                <th>图片管理</th>
-                <th>设置属性</th>
-                <th>编辑</th>
-                <th>删除</th>
+                <th  class="col-lg-1">图片</th>
+                <th  class="col-lg-3">产品名称</th>
+                <th  class="col-lg-1">小标题</th>
+                <th  class="col-lg-1">原价</th>
+                <th  class="col-lg-1">优惠价</th>
+
+                <th  class="col-lg-1">库存</th>
+                <th  class="col-lg-1">图片设置</th>
+                <th  class="col-lg-1">属性设置</th>
+                <th  class="col-lg-1">编辑</th>
+                <th  class="col-lg-1">删除</th>
             </tr>
             </thead>
 
@@ -77,7 +78,7 @@
     </div>
 
     <!--   新增商品-->
-    <div class="panel panel-warning product_addDiv">
+    <div class="panel panel-info product_addDiv">
         <div class="panel-heading">新增商品</div>
         <div class="panel-body">
 
@@ -88,15 +89,15 @@
                         <td><input name="pname" type="text" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td class="cate_text">产品小标题</td>
+                        <td class="cate_text">小标题</td>
                         <td><input name="subTitle" type="text" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td class="cate_text">原价格</td>
+                        <td class="cate_text">原价</td>
                         <td><input name="orignalPrice" type="text" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td class="cate_text">优惠价格</td>
+                        <td class="cate_text">优惠价</td>
                         <td><input name="promotePrice" type="text" class="form-control"></td>
                     </tr>
                     <tr>
@@ -107,8 +108,7 @@
                         <td colspan="2" align="center">
                             <%--    加一个隐藏域提交cid--%>
                             <input name="cid" type="hidden" value="${category.cid}" class="form-control">
-
-                            <button type="submit" class="btn btn-success">提 交</button>
+                            <button type="submit" class="btn btn-danger">添加</button>
                         </td>
                     </tr>
                 </table>
