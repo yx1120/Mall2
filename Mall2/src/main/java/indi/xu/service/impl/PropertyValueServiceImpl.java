@@ -61,7 +61,8 @@ public class PropertyValueServiceImpl implements PropertyValueService {
     public void init(Product p) {
         // 初始化商品的属性值记录
         List<Property> properties = propertyDao.list(p.getCategory().getCid());
-        for (Property property : properties) {
+
+        properties.forEach(property -> {
             if (propertyValueDao.findByPidAndPyid(p.getPid(), property.getPyid()) == null) {
                 PropertyValue propertyValue = new PropertyValue();
                 propertyValue.setProduct(p);
@@ -69,6 +70,6 @@ public class PropertyValueServiceImpl implements PropertyValueService {
 
                 propertyValueDao.add(propertyValue);
             }
-        }
+        });
     }
 }

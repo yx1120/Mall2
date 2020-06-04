@@ -40,10 +40,10 @@ public class FavoriteServiceImpl implements FavoriteService {
             return null;
         }
 
-        for (Favorite favorite : list) {
+        list.forEach(favorite -> {
             Product product = favorite.getProduct();
             productService.setFirstProductImage(product);
-        }
+        });
         return list;
     }
 

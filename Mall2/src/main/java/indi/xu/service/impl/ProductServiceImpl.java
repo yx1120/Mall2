@@ -37,9 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void add(Product bean) {
-        System.out.println(bean+": before....");
         productDao.add(bean);
-        System.out.println(bean+": after....");
         propertyValueService.init(bean);
     }
 
@@ -47,15 +45,12 @@ public class ProductServiceImpl implements ProductService {
     public void deleteByPid(int pid) {
         // 级联，因为有外键关联，所以删除一个商品先删除商品的所有图片
         // 还有商品的属性值
-        List<ProductImage> singleList = productImageService.list(pid, ProductImageService.TYPE_SINGLE);
-        List<ProductImage> detailsList = productImageService.list(pid, ProductImageService.TYPE_DETAIL);
-        for (ProductImage image : detailsList) {
-            productImageService.delete(image.getGid());
+        List<ProductImage> singleList = productImageDao.list(pid, ProductImageService.TYPE_SINGLE);
+        List<ProductImage> detailsList = productImageDao.list(pid, ProductImageService.TYPE_DETAIL);
+        if(singleList!=null && detailsList!=null){
+            singleList.forEach(s->productImageDao.delete(s.getGid()));
+            detailsList.forEach(s->productImageDao.delete(s.getGid()));
         }
-        for (ProductImage image2 : singleList) {
-            productImageService.delete(image2.getGid());
-        }
-
         // 删除属性值
         propertyValueDao.deleteByPid(pid);
 
@@ -137,9 +132,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void fillCategory(List<Category> cs, int size) {
-        for (Category c : cs) {
-            this.fillCategory(c, size);
-        }
+        cs.forEach(category -> this.fillCategory(category,size));
     }
 
     @Override
@@ -152,16 +145,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void setFirstProductImage(List<Product> products) {
-        for (Product product : products) {
-            this.setFirstProductImage(product);
-        }
+        products.forEach(this::setFirstProductImage);
     }
 
     @Override
     public void setSaleAndReviewNumber(List<Product> products) {
-        for (Product product : products) {
-            this.setSaleAndReviewNumber(product);
-        }
+        products.forEach(this::setSaleAndReviewNumber);
     }
 
     @Override

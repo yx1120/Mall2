@@ -58,10 +58,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     public List<OrderItem> findItemsForShopCart(int uid) {
         List<OrderItem> items = orderItemDao.findItemsByUid(uid);
         if(items != null){
-            for (OrderItem cartItem : items) {
-                Product product = cartItem.getProduct();
-                productService.setFirstProductImage(product);
-            }
+            items.forEach(cartItem->productService.setFirstProductImage(cartItem.getProduct()));
         }
         return items;
     }
@@ -95,9 +92,7 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public void fillOrders(List<Order> os) {
-        for (Order o : os) {
-            this.fillOrder(o);
-        }
+        os.forEach(this::fillOrder);
     }
 
     @Override
@@ -113,8 +108,6 @@ public class OrderItemServiceImpl implements OrderItemService {
     /**
      * 查询用户所有评价
      *
-     * @param uid
-     * @return
      */
     @Override
     public List<OrderItem> findUserItemsByUid(Integer uid) {

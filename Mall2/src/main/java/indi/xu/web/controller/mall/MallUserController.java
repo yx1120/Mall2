@@ -221,7 +221,7 @@ public class MallUserController {
         }
 
         // 生成n位验证码
-        String phoneCode = NumberUtil.createPhoneCheckCode(MallConstant.PHONE_CHECK_CODE_NUM);
+        String phoneCode = NumberUtil.createPhoneCheckCode();
         HashMap<String,String> param = new HashMap<>();
         param.put("code", phoneCode);
         // 调用sms --->成功-redis   失败-无

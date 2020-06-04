@@ -1,6 +1,7 @@
 package indi.xu.utils;
 
 import indi.xu.common.MallConstant;
+import indi.xu.web.controller.auth.MallOrderController;
 
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -60,10 +61,10 @@ public class NumberUtil {
     /**
      * 生成指定位数手机验证码
      */
-    public static String createPhoneCheckCode(int num){
+    public static String createPhoneCheckCode(){
         StringBuilder sb = new StringBuilder();
         Random rd = new Random();
-        for (int i = 0; i < num; i++) {
+        for (int i = 0; i < MallConstant.PHONE_CHECK_CODE_NUM; i++) {
             sb.append(rd.nextInt(10));
         }
         return sb.toString();
